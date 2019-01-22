@@ -1,7 +1,5 @@
 #pragma once
 
-#ifdef HZ_PLATFORM_WIN
+#ifdef COG_PLATFORM_WINDOWS
 
-
-
-#endif // HZ_PLATFORM_WIN
+#endif // PLATFORM_WIN
