@@ -10,9 +10,5 @@ namespace COG{
 		public:
 		COG_Engine();
 		~COG_Engine();
-
-		inline void test_print() const {
-			std::cout << "welcome to COG Engine" << std::endl;
-		}
 	};
 }
