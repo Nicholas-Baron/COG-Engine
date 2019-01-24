@@ -3,12 +3,10 @@
 #include "Core.h"
 #include "spdlog/spdlog.h"
 
-#include <memory>
-
 namespace COG {
 	class COG_API Log {
 		public:
-		static void Init(const std::string& app_name);
+		static void init(const std::string& app_name);
 		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
 		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 		

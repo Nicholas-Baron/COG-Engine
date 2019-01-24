@@ -12,6 +12,11 @@ workspace "COG"
 
 output = "%{cfg.buildcfg}_%{cfg.system}_%{cfg.architecture}"
 
+IncludeDirs = {}
+IncludeDirs["GLAD"] = "Engine/vendor/GLAD/include"
+
+include "Engine/vendor/GLAD"
+
 project "COG"
 	location "Engine"
 	kind "SharedLib"
@@ -26,7 +31,16 @@ project "COG"
 		"%{prj.location}/src/**.h" 
 	}
 	
-	includedirs{ "%{prj.location}/vendor/spdlog/include" }
+	includedirs{ 
+		"%{prj.location}/vendor/spdlog/include",
+		"%{prj.location}/src",
+		"%{IncludeDirs.GLAD}"
+	}
+	
+	links{
+		"Glad",
+		"opengl32.lib"
+	}
 	
 	filter "system:windows"
 		cppdialect "C++17"

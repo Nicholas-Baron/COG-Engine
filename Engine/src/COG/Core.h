@@ -1,5 +1,7 @@
 #pragma once
 
+#include "precomp/precomp.h"
+
 #ifdef COG_PLATFORM_WINDOWS
 	#ifdef COG_BUILD_DLL
         #define COG_API __declspec(dllexport)
@@ -9,3 +11,5 @@
 #else
 	#error COG only supports Windows!
 #endif
+
+constexpr inline unsigned char bit(unsigned char x) noexcept { return 1 << x; }

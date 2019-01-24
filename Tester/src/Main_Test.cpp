@@ -7,7 +7,7 @@ int main() {
 	
 	COG_Engine cog;
 
-	COG::Log::Init("Tester");
+	COG::Log::init("Tester");
 
 	info("Engine ready");
 
