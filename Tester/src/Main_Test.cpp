@@ -7,8 +7,6 @@ int main() {
 	
 	COG_Engine cog;
 
-	COG::Log::init("Tester");
-
 	info("Engine ready");
 
 	std::cin.get();

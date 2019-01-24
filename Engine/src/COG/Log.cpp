@@ -6,7 +6,8 @@
 
 namespace COG {
 	
-	COG_API std::shared_ptr<spdlog::logger> Log::s_CoreLogger, Log::s_ClientLogger;
+	 std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
+	 std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
 
 	void Log::init(const std::string& app_name) {
 		

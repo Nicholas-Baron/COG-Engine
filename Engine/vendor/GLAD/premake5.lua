@@ -1,6 +1,7 @@
 project "Glad"
+	
 	kind "StaticLib"
-	langauge "C"
+	language("C")
 	
 	targetdir("%{prj.location}/bin/" .. output .. "/")
 	objdir("%{prj.location}/bin-temp/" .. output .. "/")
@@ -15,7 +16,7 @@ project "Glad"
 	
 	filter "system:windows"
 		systemversion "latest"
-		staticrntime "On"
+		staticruntime "On"
 		
 	filter { "system:windows", "configurations:Release*" }
 		buildoptions "/MT"

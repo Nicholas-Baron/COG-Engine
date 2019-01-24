@@ -17,10 +17,6 @@ namespace COG {
 
 	class COG_API Window{
 		
-		protected:
-		WindowDetails details;
-		bool vsync_on;
-		
 		public:
 		
 		virtual ~Window(){}
@@ -28,13 +24,24 @@ namespace COG {
 		virtual void on_update() = 0;
 
 		using callback = std::function<void()>;
-		virtual void set_callback(const callback& callback)=0;
+		inline void set_callback(const callback& callback){ callfn = callback; }
 
-		static std::unique_ptr<Window> create(const WindowDetails& details = WindowDetails());
-		
 		inline unsigned width() const noexcept { return details.width; }
 		inline unsigned height() const noexcept { return details.height; }
 		inline bool vsync() const noexcept { return vsync_on; }
+	
+		protected:
+		WindowDetails details;
+		bool vsync_on;
+		callback callfn;
 	};
+
+	template<typename T>
+	inline std::unique_ptr<T> create_window(const WindowDetails& details){
+		
+		static_assert(std::is_base_of<Window, T>(), "T need to be a type of window!");
+
+		return std::make_unique<T>(details);
+	}
 
 }

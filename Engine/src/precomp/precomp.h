@@ -7,5 +7,6 @@
 #include <string>
 #include <iostream>
 #include <functional>
+#include <cassert>
 
 #endif // !_PRECOMP

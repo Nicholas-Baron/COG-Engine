@@ -4,6 +4,15 @@
     <Filter Include="COG">
       <UniqueIdentifier>{5EDA870B-CAE3-877C-535F-9E7CBF67937C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="precomp">
+      <UniqueIdentifier>{9B2482C2-0704-015E-101C-8C347C7A67BF}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\COG.h" />
@@ -19,9 +28,15 @@
     <ClInclude Include="src\COG\Log.h">
       <Filter>COG</Filter>
     </ClInclude>
-    <ClInclude Include="src\COG\precomp\precomp.h" />
-    <ClInclude Include="src\COG\Window.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\COG\Window.h">
+      <Filter>COG</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\precomp\precomp.h">
+      <Filter>precomp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\COG\COG_Engine.cpp">
@@ -30,6 +45,11 @@
     <ClCompile Include="src\COG\Log.cpp">
       <Filter>COG</Filter>
     </ClCompile>
-    <ClCompile Include="src\COG\precomp.cpp" />
+    <ClCompile Include="src\COG\precomp.cpp">
+      <Filter>COG</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

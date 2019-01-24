@@ -14,8 +14,10 @@ output = "%{cfg.buildcfg}_%{cfg.system}_%{cfg.architecture}"
 
 IncludeDirs = {}
 IncludeDirs["GLAD"] = "Engine/vendor/GLAD/include"
+IncludeDirs["GLFW"] = "Engine/vendor/GLFW/include"
 
 include "Engine/vendor/GLAD"
+include "Engine/vendor/GLFW"
 
 project "COG"
 	location "Engine"
@@ -24,6 +26,9 @@ project "COG"
 	
 	targetdir("%{prj.location}/bin/" .. output .. "/")
 	objdir("%{prj.location}/bin-temp/" .. output .. "/")
+	
+	pchheader "precomp/precomp.h"
+	pchsource "Engine/src/COG/precomp.cpp"
 	
 	files { 
 		"%{prj.location}/src/**.cpp",
@@ -34,11 +39,13 @@ project "COG"
 	includedirs{ 
 		"%{prj.location}/vendor/spdlog/include",
 		"%{prj.location}/src",
-		"%{IncludeDirs.GLAD}"
+		"%{IncludeDirs.GLAD}",
+		"%{IncludeDirs.GLFW}"
 	}
 	
 	links{
 		"Glad",
+		"GLFW",
 		"opengl32.lib"
 	}
 	
@@ -50,15 +57,18 @@ project "COG"
 		defines { "COG_PLATFORM_WINDOWS", "COG_BUILD_DLL" }
 		
 	filter "configurations:Debug*"
-		defines "COG_DEBUG"
+		defines { "COG_DEBUG", "COG_ENABLE_ASSERTS" }
+		buildoptions "/MDd"
 		symbols "On"
 		
 	filter "configurations:Release*"
-		defines "COG_RELEASE"
+		defines { "COG_RELEASE", "COG_ENABLE_ASSERTS" }
+		buildoptions "/MD"
 		optimize "On"
 		
 	filter "configurations:Dist*"
 		defines "COG_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 project "Test"
@@ -93,12 +103,15 @@ project "Test"
 		
 	filter "configurations:Debug*"
 		defines "COG_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 		
 	filter "configurations:Release*"
 		defines "COG_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 		
 	filter "configurations:Dist*"
 		defines "COG_DIST"
+		buildoptions "/MD"
 		optimize "On"
