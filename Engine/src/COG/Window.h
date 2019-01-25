@@ -3,6 +3,7 @@
 #include "precomp/precomp.h"
 
 #include "Core.h"
+#include "Events/Event.h"
 
 namespace COG {
 
@@ -20,20 +21,18 @@ namespace COG {
 		public:
 		
 		virtual ~Window(){}
+		virtual inline bool vsync() const noexcept = 0;
 		virtual void set_vsync(bool enable = true) = 0;
 		virtual void on_update() = 0;
 
-		using callback = std::function<void()>;
-		inline void set_callback(const callback& callback){ callfn = callback; }
+		using callback = std::function<void(Event&)>;
+		inline virtual void set_callback(const callback& callback) = 0;
 
 		inline unsigned width() const noexcept { return details.width; }
 		inline unsigned height() const noexcept { return details.height; }
-		inline bool vsync() const noexcept { return vsync_on; }
-	
+		
 		protected:
 		WindowDetails details;
-		bool vsync_on;
-		callback callfn;
 	};
 
 	template<typename T>

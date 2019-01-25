@@ -37,6 +37,10 @@
     <ClInclude Include="src\precomp\precomp.h">
       <Filter>precomp</Filter>
     </ClInclude>
+    <ClInclude Include="src\COG\Events\Event.h" />
+    <ClInclude Include="src\COG\Events\AppEvent.h" />
+    <ClInclude Include="src\COG\Events\KeyEvent.h" />
+    <ClInclude Include="src\COG\Events\MouseEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\COG\COG_Engine.cpp">
@@ -51,5 +55,8 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

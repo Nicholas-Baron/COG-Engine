@@ -3,6 +3,8 @@
 #include "WindowsWindow.h"
 #include "COG/Log.h"
 
+#include "COG/Events/AppEvent.h"
+
 namespace COG {
 	
 	static bool glfw_ready = false;
@@ -12,7 +14,7 @@ namespace COG {
 	}
 	
 	WindowsWindow::WindowsWindow(const WindowDetails& details_in) {
-		this->details = details_in;
+		details = details_in;
 
 		info_internal("Creating window " + details.title);
 
@@ -25,10 +27,21 @@ namespace COG {
 
 		window = glfwCreateWindow(details.width, details.height, details.title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(window);
-		auto status = gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
+		auto status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		COG_ASSERT_INTERNAL(status, "Failed to init GLAD!");
 		glfwSetWindowUserPointer(window, &details);
 		set_vsync();
+
+		glfwSetWindowSizeCallback(window, [](GLFWwindow* win, int width, int height){
+			auto& data = *reinterpret_cast<WindowData*>(glfwGetWindowUserPointer(win));
+			data.height = height;
+			data.width = width;
+
+			WindowResizeEvent ev(width, height);
+			data.event_callback(ev);
+		});
+
+		//TODO: Setup other callbacks
 	}
 
 	WindowsWindow::~WindowsWindow() {
@@ -42,6 +55,6 @@ namespace COG {
 	
 	void WindowsWindow::set_vsync(bool enable) {
 		glfwSwapInterval(enable?1:0);
-		vsync_on = enable;
+		data.vsync = enable;
 	}
 }

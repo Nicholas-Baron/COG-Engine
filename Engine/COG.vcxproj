@@ -299,6 +299,10 @@
     <ClInclude Include="src\COG\COG_Engine.h" />
     <ClInclude Include="src\COG\Core.h" />
     <ClInclude Include="src\COG\Entry_Point.h" />
+    <ClInclude Include="src\COG\Events\AppEvent.h" />
+    <ClInclude Include="src\COG\Events\Event.h" />
+    <ClInclude Include="src\COG\Events\KeyEvent.h" />
+    <ClInclude Include="src\COG\Events\MouseEvent.h" />
     <ClInclude Include="src\COG\Log.h" />
     <ClInclude Include="src\COG\Window.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
@@ -319,6 +323,9 @@
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">
       <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

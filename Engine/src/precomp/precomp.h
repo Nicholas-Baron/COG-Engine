@@ -8,5 +8,8 @@
 #include <iostream>
 #include <functional>
 #include <cassert>
+#include <sstream>
+#include <array>
+#include <vector>
 
 #endif // !_PRECOMP

@@ -3,9 +3,8 @@
 #include <iostream>
 
 int main() {
-	using COG::COG_Engine;
-	
-	COG_Engine cog;
+
+	COG::COG_Engine cog;
 
 	info("Engine ready");
 
