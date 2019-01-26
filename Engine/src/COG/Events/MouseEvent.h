@@ -4,7 +4,7 @@
 
 namespace COG {
 	
-	class COG_API MouseMovedEvent : public Event {
+	class COG_API MouseMovedEvent : public Event<EventType::MouseMove> {
 		public:
 		MouseMovedEvent(float x, float y) noexcept
 			: mouseX(x), mouseY(y) {}
@@ -12,7 +12,7 @@ namespace COG {
 		inline float x() const noexcept { return mouseX; }
 		inline float y() const noexcept { return mouseY; }
 
-		inline virtual std::string string() const override {
+		inline virtual std::string str() const override {
 			std::stringstream ss("MouseMovedEvent: ");
 			ss << mouseX << ", " << mouseY;
 			return ss.str();
@@ -24,7 +24,7 @@ namespace COG {
 		float mouseX, mouseY;
 	};
 
-	class COG_API MouseScrolledEvent : public Event {
+	class COG_API MouseScrolledEvent : public Event<EventType::MouseScroll> {
 		public:
 		MouseScrolledEvent(float xOffset, float yOffset) noexcept
 			: xOff(xOffset), yOff(yOffset) {}
@@ -32,19 +32,21 @@ namespace COG {
 		inline float xOffset() const noexcept { return xOff; }
 		inline float yOffset() const noexcept { return yOff; }
 
-		inline virtual std::string string() const override {
+		inline virtual std::string str() const override {
 			std::stringstream ss("MouseScrolledEvent: ");
 			ss << xOffset() << ", " << yOffset();
 			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(MouseScrolled)
-			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+		
 		private:
 		float xOff, yOff;
 	};
 
-	class COG_API MouseButtonEvent : public Event {
+	template<EventType type>
+	class COG_API MouseButtonEvent : public Event<type> {
 		public:
 		inline int GetMouseButton() const noexcept { return button; }
 
@@ -56,25 +58,25 @@ namespace COG {
 		int button;
 	};
 
-	class COG_API MouseButtonPressedEvent : public MouseButtonEvent {
+	class COG_API MouseButtonPressedEvent : public MouseButtonEvent<EventType::MousePress> {
 		public:
 		MouseButtonPressedEvent(int button)	noexcept
 			: MouseButtonEvent(button) {}
 
-		inline virtual std::string string() const override {
+		inline virtual std::string str() const override {
 			return "MouseButtonPressedEvent: " + std::to_string(button);
 		}
 
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class COG_API MouseButtonReleasedEvent : public MouseButtonEvent {
+	class COG_API MouseButtonReleasedEvent : public MouseButtonEvent<EventType::MouseRelease> {
 		public:
 		MouseButtonReleasedEvent(int button) noexcept
 			: MouseButtonEvent(button) {}
 
-		inline virtual std::string string() const override {
-			return "MouseButtonReleasedEvent: " std::to_string(button);
+		inline virtual std::string str() const override {
+			return "MouseButtonReleasedEvent: " + std::to_string(button);
 		}
 
 		EVENT_CLASS_TYPE(MouseButtonReleased)

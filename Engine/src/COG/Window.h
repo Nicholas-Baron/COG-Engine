@@ -24,15 +24,14 @@ namespace COG {
 		virtual inline bool vsync() const noexcept = 0;
 		virtual void set_vsync(bool enable = true) = 0;
 		virtual void on_update() = 0;
+		virtual void destroy() = 0;
 
 		using callback = std::function<void(Event&)>;
+		
 		inline virtual void set_callback(const callback& callback) = 0;
 
-		inline unsigned width() const noexcept { return details.width; }
-		inline unsigned height() const noexcept { return details.height; }
-		
-		protected:
-		WindowDetails details;
+		virtual inline unsigned width() const noexcept = 0;
+		virtual inline unsigned height() const noexcept = 0;
 	};
 
 	template<typename T>

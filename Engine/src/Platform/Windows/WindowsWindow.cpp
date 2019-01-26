@@ -10,42 +10,58 @@ namespace COG {
 	static bool glfw_ready = false;
 
 	static void glfw_error_callback(int error, const char * const desc){
-		error_internal("GLFW Error " + std::to_string(error) + " : " + desc);
+		
+		std::stringstream print("GLFW Error #");
+		print << std::showbase << std::hex << error << " : " << desc;
+		error_internal(print.str());
 	}
 	
 	WindowsWindow::WindowsWindow(const WindowDetails& details_in) {
-		details = details_in;
+		
+		data = details_in;
 
-		info_internal("Creating window " + details.title);
-
+		info_internal("Creating window labeled " + data.title + "...");
+		
 		if(!glfw_ready){
-			auto success = glfwInit();
-			COG_ASSERT_INTERNAL(success, "Could not init GLFW!");
+			COG_ASSERT_INTERNAL(glfwInit(), "Could not init GLFW!");
 			glfwSetErrorCallback(glfw_error_callback);
 			glfw_ready = true;
 		}
 
-		window = glfwCreateWindow(details.width, details.height, details.title.c_str(), nullptr, nullptr);
+		info_internal("GLFW is ready.");
+
+		window = glfwCreateWindow(data.width, data.height, data.title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(window);
-		auto status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		COG_ASSERT_INTERNAL(status, "Failed to init GLAD!");
-		glfwSetWindowUserPointer(window, &details);
+		COG_ASSERT_INTERNAL(gladLoadGLLoader((GLADloadproc) glfwGetProcAddress), "Failed to init GLAD!");
+		glfwSetWindowUserPointer(window, &data);
 		set_vsync();
 
-		glfwSetWindowSizeCallback(window, [](GLFWwindow* win, int width, int height){
-			auto& data = *reinterpret_cast<WindowData*>(glfwGetWindowUserPointer(win));
-			data.height = height;
-			data.width = width;
+		info_internal("Setting callbacks...");
+
+		glfwSetWindowSizeCallback(window, [](auto* win, int width, int height) -> void {
+			auto* data = (WindowData*)glfwGetWindowUserPointer(win);
+			data->height = height;
+			data->width = width;
 
 			WindowResizeEvent ev(width, height);
-			data.event_callback(ev);
+			data->event_callback(ev);
+		});
+
+		glfwSetWindowCloseCallback(window, [](auto* win) -> void {
+			auto* data = (WindowData*)glfwGetWindowUserPointer(win);
+		
+			warn_internal("Closing...");
+
+			WindowCloseEvent ev;
+			data->event_callback(ev);
 		});
 
 		//TODO: Setup other callbacks
 	}
 
-	WindowsWindow::~WindowsWindow() {
-		glfwDestroyWindow(window);
+	void WindowsWindow::destroy() {
+		//glfwDestroyWindow(window);
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
 	}
 	
 	void WindowsWindow::on_update() {

@@ -8,6 +8,6 @@ int main() {
 
 	info("Engine ready");
 
-	std::cin.get();
+	cog.run();
 
 }

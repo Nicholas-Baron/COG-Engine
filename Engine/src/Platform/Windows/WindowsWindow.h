@@ -10,15 +10,18 @@ namespace COG {
 	class WindowsWindow : public Window {
 		public:
 		WindowsWindow(const WindowDetails& details);
-		virtual ~WindowsWindow();
-
+		virtual inline ~WindowsWindow(){ destroy();  }
 		virtual inline bool vsync() const noexcept override{ return data.vsync; }
 		
 		virtual void on_update() override;
+		virtual void destroy() override;
 		virtual void set_vsync(bool enable = true) override;
-		inline virtual void set_callback(const callback& callback){ 
+		inline virtual void set_callback(const callback& callback) override { 
 			data.event_callback = callback;
 		}
+
+		virtual inline unsigned width() const noexcept { return data.width; }
+		virtual inline unsigned height() const noexcept { return data.height; }
 
 		private:
 		GLFWwindow* window;
@@ -29,6 +32,12 @@ namespace COG {
 		   bool vsync;
 
 		   callback event_callback;
+
+		   inline void operator=(const WindowDetails& rhs) {
+			   title = rhs.title;
+			   width = rhs.width;
+			   height = rhs.height;
+		   }
 		} data;
 	};
 

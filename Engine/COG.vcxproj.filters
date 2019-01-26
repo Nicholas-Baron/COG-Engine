@@ -4,6 +4,9 @@
     <Filter Include="COG">
       <UniqueIdentifier>{5EDA870B-CAE3-877C-535F-9E7CBF67937C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="COG\Events">
+      <UniqueIdentifier>{82709088-6E28-D2D5-D72F-AB31C3066DC6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
@@ -25,6 +28,18 @@
     <ClInclude Include="src\COG\Entry_Point.h">
       <Filter>COG</Filter>
     </ClInclude>
+    <ClInclude Include="src\COG\Events\AppEvent.h">
+      <Filter>COG\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\COG\Events\Event.h">
+      <Filter>COG\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\COG\Events\KeyEvent.h">
+      <Filter>COG\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\COG\Events\MouseEvent.h">
+      <Filter>COG\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\COG\Log.h">
       <Filter>COG</Filter>
     </ClInclude>
@@ -37,10 +52,6 @@
     <ClInclude Include="src\precomp\precomp.h">
       <Filter>precomp</Filter>
     </ClInclude>
-    <ClInclude Include="src\COG\Events\Event.h" />
-    <ClInclude Include="src\COG\Events\AppEvent.h" />
-    <ClInclude Include="src\COG\Events\KeyEvent.h" />
-    <ClInclude Include="src\COG\Events\MouseEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\COG\COG_Engine.cpp">
@@ -55,8 +66,5 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

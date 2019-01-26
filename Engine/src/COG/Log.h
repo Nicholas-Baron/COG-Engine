@@ -46,7 +46,7 @@ inline void COG_ASSERT(bool x, const std::string& msg = "") {
 	if(!(x)) { error("Assert failed: " + msg); __debugbreak(); }
 }
 inline void COG_ASSERT_INTERNAL(bool x, const std::string& msg = "") {
-	if(!(x)) { COG::error_internal("Assert failed: " + msg); __debugbreak(); }
+	if(!(x)) { COG::error_internal("Internal Assert failed: " + msg); __debugbreak(); }
 }
 #else
 #define COG_ASSERT(x, ...)

@@ -23,9 +23,8 @@ namespace COG {
 		EventCategoryMouseButton = bit(4)
 	};
 
-#define EVENT_CLASS_TYPE(type) static EventType static_type() noexcept { return EventType::##type; }\
-							   virtual EventType type() const { return static_type(); }\
-							   virtual const char* name() const override { return #type; }
+#define EVENT_CLASS_TYPE(type) virtual const char* name() const override { return #type; } static EventType static_type() { return EventType::##type; } virtual EventType type() const { return static_type(); }
+
 	
 #define EVENT_CLASS_CATEGORY(category) virtual int category_flags() const override { return category; }
 
@@ -33,12 +32,12 @@ namespace COG {
 		public:
 		bool handled = false;
 
-		virtual EventType type() const { return EventType::None; };
+		virtual inline EventType type() const = 0;
 		virtual const char* name() const { return "None"; }
 		virtual int category_flags() const = 0;
-		virtual inline std::string string() const { return name();  }
+		virtual inline std::string str() const { return name();  }
 		
-		inline operator std::string() const { return string(); }
+		inline operator std::string() const { return str(); }
 		inline bool in_category(EventCategory category) const { 
 			return category_flags() & category;
 		}
@@ -54,9 +53,9 @@ namespace COG {
 		template<typename T>
 		bool dispatch(EventFn<T> func){
 			
-			static_assert(std::is_base_of<Event, T>());
+			static_assert(std::is_base_of<Event, T>(), "Using EventDispatcher::dispatch on a non-Event child?");
 
-			if(e.type() == T::GetStaticType()) {
+			if(e.type() == T::static_type()) {
 				e.handled = func(*reinterpret_cast<T*>(&e));
 				return true;
 			}
@@ -65,17 +64,19 @@ namespace COG {
 		}
 
 		private:
-		  Event& e;
+		Event& e;
 	};
 
 }
 
 namespace std {
+	
 	inline std::string to_string(const COG::Event& e){
-		return e.string();
+		return e.str();
 	}
 }
 
+template<COG::EventType type>
 inline std::ostream& operator<<(std::ostream& lhs, const COG::Event& rhs){
 	return lhs << std::to_string(rhs);
 }
