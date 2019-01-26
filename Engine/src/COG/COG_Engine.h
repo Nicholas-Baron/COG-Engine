@@ -6,7 +6,7 @@
 
 namespace COG{
 	
-	class COG_API COG_Engine {
+	class COG_Engine {
 		
 		private:
 		
@@ -14,13 +14,15 @@ namespace COG{
 		
 		std::unique_ptr<Window> window;
 		bool running;
+		unsigned last_second_frames;
 
 		public:
-		COG_Engine(const WindowDetails& details = WindowDetails());
+		COG_API COG_Engine(const WindowDetails& details = WindowDetails());
 		
+		COG_API inline unsigned frame_count() const noexcept { return last_second_frames; }
 		inline bool on_window_close(WindowCloseEvent& e);
 		
 		void on_event(Event& e);
-		void run();
+		COG_API void run();
 	};
 }
