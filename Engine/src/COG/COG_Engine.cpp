@@ -10,20 +10,23 @@ namespace COG {
 	
 	COG_Engine::COG_Engine(const WindowDetails& details) {
 		
+		Log::init(details.title);
+		
 		COG_ASSERT_INTERNAL(instance == nullptr, "Multiple instances of the COG Engine found!");
 		instance = this;
 		running = true;
 		
-		Log::init(details.title);
-
+		
 #ifdef COG_PLATFORM_WINDOWS
-	window = create_window<WindowsWindow>(details);
+		window = create_window<WindowsWindow>(details);
 #else
 		#error Only Windows is currently supported!
 #endif
-	window->set_callback(std::bind(&COG_Engine::on_event, this, std::placeholders::_1));
+		window->set_callback(std::bind(&COG_Engine::on_event, this, std::placeholders::_1));
 
-
+		set_clear_color(0, .5, 1);
+		
+		start = time_now();
 	}
 	void COG_Engine::on_event(Event & e) {
 	
@@ -40,7 +43,7 @@ namespace COG {
 		double previous_time = glfwGetTime();
 
 		while(running) {
-			  glClearColor(0,0,1,.5);
+			  glClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]);
 			  glClear(GL_COLOR_BUFFER_BIT);
 
 			  window->on_update();

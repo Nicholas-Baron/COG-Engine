@@ -3,14 +3,23 @@
 
 //Include at the top of your file for faster compile times
 
-#include <memory>
-#include <string>
-#include <iostream>
-#include <iomanip>
-#include <functional>
+//Old C Stuff
 #include <cassert>
-#include <sstream>
+
+//Containers
 #include <array>
+#include <sstream>
 #include <vector>
+
+//IO Stuff
+#include <iomanip>
+#include <iostream>
+
+//Etc
+#include <chrono>
+#include <functional>
+#include <memory>
+#include <stdexcept>
+#include <string>
 
 #endif // !_PRECOMP
