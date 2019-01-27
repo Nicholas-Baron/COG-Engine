@@ -43,7 +43,7 @@ namespace COG {
 		}
 	}
 #else
-	inline void COG_ASSERT_INTERNAL(bool x, const std::string& msg = "") {}
+	inline void COG_ASSERT_INTERNAL(bool x, const std::string& msg = "") noexcept {}
 #endif // COG_ENABLE_ASSERTS
 
 }
@@ -59,5 +59,5 @@ inline COG_API void COG_ASSERT(bool x, const std::string& msg = "") {
 	if(!x) { error("Assert failed: " + msg); __debugbreak(); }
 }
 #else
-#define COG_ASSERT(x, ...)
+inline COG_API COG_ASSERT(x, const std::string& msg = "") noexcept {}
 #endif // COG_ENABLE_ASSERTS
