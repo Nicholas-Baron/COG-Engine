@@ -304,6 +304,7 @@
     <ClInclude Include="src\COG\Events\KeyEvent.h" />
     <ClInclude Include="src\COG\Events\MouseEvent.h" />
     <ClInclude Include="src\COG\Log.h" />
+    <ClInclude Include="src\COG\Version.h" />
     <ClInclude Include="src\COG\Window.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\precomp\precomp.h" />

@@ -52,8 +52,7 @@
     <ClInclude Include="src\precomp\precomp.h">
       <Filter>precomp</Filter>
     </ClInclude>
-    <ClInclude Include="src\COG\Utils\Vec3d.h" />
-    <ClInclude Include="src\COG\Utils\Vec2d.h" />
+    <ClInclude Include="src\COG\Version.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\COG\COG_Engine.cpp">

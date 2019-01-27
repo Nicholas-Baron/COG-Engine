@@ -59,5 +59,5 @@ inline COG_API void COG_ASSERT(bool x, const std::string& msg = "") {
 	if(!x) { error("Assert failed: " + msg); __debugbreak(); }
 }
 #else
-inline COG_API COG_ASSERT(x, const std::string& msg = "") noexcept {}
+inline COG_API void COG_ASSERT(bool x, const std::string& msg = "") noexcept {}
 #endif // COG_ENABLE_ASSERTS

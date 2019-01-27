@@ -3,6 +3,7 @@
 #include "COG_Engine.h"
 #include "Log.h"
 #include "Platform/Windows/WindowsWindow.h"
+#include "Version.h"
 
 namespace COG {
 	
@@ -12,6 +13,8 @@ namespace COG {
 		
 		Log::init(details.title);
 		
+		info_internal("COG Version: " + version_print());
+
 		COG_ASSERT_INTERNAL(instance == nullptr, "Multiple instances of the COG Engine found!");
 		instance = this;
 		running = true;
