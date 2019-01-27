@@ -16,7 +16,7 @@ namespace COG {
 					 :title(name), width(wide), height(high) {}
 	};
 
-	class COG_API Window{
+	class Window{
 		
 		public:
 		
@@ -27,7 +27,6 @@ namespace COG {
 		virtual void destroy() = 0;
 
 		using callback = std::function<void(Event&)>;
-		
 		inline virtual void set_callback(const callback& callback) = 0;
 
 		virtual inline unsigned width() const noexcept = 0;
@@ -38,7 +37,6 @@ namespace COG {
 	inline std::unique_ptr<T> create_window(const WindowDetails& details){
 		
 		static_assert(std::is_base_of<Window, T>(), "T need to be a type of window!");
-
 		return std::make_unique<T>(details);
 	}
 

@@ -10,7 +10,7 @@ namespace COG {
 	class WindowsWindow : public Window {
 		public:
 		WindowsWindow(const WindowDetails& details);
-		virtual inline ~WindowsWindow(){ destroy();  }
+		virtual inline ~WindowsWindow(){ }
 		virtual inline bool vsync() const noexcept override{ return data.vsync; }
 		
 		virtual void on_update() override;
