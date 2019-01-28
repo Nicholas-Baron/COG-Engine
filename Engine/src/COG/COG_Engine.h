@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "Window.h"
 #include "Events/AppEvent.h"
+#include "Layering/LayerStack.h"
 
 namespace COG{
 	
@@ -15,6 +16,8 @@ namespace COG{
 		static COG_Engine* instance;
 		std::chrono::high_resolution_clock::time_point start;
 		bool running;
+
+		LayerStack layers;
 
 		//Visual stuff
 
@@ -40,6 +43,10 @@ namespace COG{
 		}
 
 		COG_API void run();
+
+		COG_API inline LayerStack& layer_stack() noexcept {
+			return layers;
+		}
 
 		inline bool on_window_close(WindowCloseEvent& e);
 		void on_event(Event& e);

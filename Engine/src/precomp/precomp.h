@@ -8,6 +8,7 @@
 
 //Containers
 #include <array>
+#include <deque>
 #include <sstream>
 #include <vector>
 

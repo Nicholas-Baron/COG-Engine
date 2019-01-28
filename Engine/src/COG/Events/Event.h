@@ -23,9 +23,7 @@ namespace COG {
 		EventCategoryMouseButton = bit(4)
 	};
 
-#define EVENT_CLASS_TYPE(type) virtual const char* name() const override { return #type; } static EventType static_type() { return EventType::##type; } virtual EventType type() const { return static_type(); }
-
-	
+#define EVENT_CLASS_TYPE(type) virtual const char* name() const override { return #type; } 	
 #define EVENT_CLASS_CATEGORY(category) virtual int category_flags() const override { return category; }
 
 	class COG_API Event {

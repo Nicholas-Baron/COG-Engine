@@ -2,9 +2,11 @@
 
 #include "Event.h"
 
+#include "COG/Utils/Vec2d.h"
+
 namespace COG {
 	
-	class COG_API MouseMovedEvent : public Event<EventType::MouseMove> {
+	class COG_API MouseMovedEvent : public Event {
 		public:
 		MouseMovedEvent(float x, float y) noexcept
 			: mouseX(x), mouseY(y) {}
@@ -18,19 +20,22 @@ namespace COG {
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(MouseMoved)
-			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+		EVENT_CLASS_TYPE(MouseMove)
+		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+
+			static EventType static_type() { return EventType::MouseMove; } 
+			virtual EventType type() const override { return static_type(); }
 		private:
 		float mouseX, mouseY;
 	};
 
-	class COG_API MouseScrolledEvent : public Event<EventType::MouseScroll> {
+	class COG_API MouseScrolledEvent : public Event {
 		public:
-		MouseScrolledEvent(float xOffset, float yOffset) noexcept
-			: xOff(xOffset), yOff(yOffset) {}
+		MouseScrolledEvent(double xOffset, double yOffset) noexcept
+			: offset(xOffset, yOffset) {}
 
-		inline float xOffset() const noexcept { return xOff; }
-		inline float yOffset() const noexcept { return yOff; }
+		inline float xOffset() const noexcept { return offset.x_val(); }
+		inline float yOffset() const noexcept { return offset.y_val(); }
 
 		inline virtual std::string str() const override {
 			std::stringstream ss("MouseScrolledEvent: ");
@@ -40,17 +45,20 @@ namespace COG {
 
 		EVENT_CLASS_TYPE(MouseScrolled)
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
-		
+		static EventType static_type() { return EventType::MouseScroll; } 
+		virtual EventType type() const override final { return static_type(); }
 		private:
-		float xOff, yOff;
+		Vec2d offset;
 	};
 
-	template<EventType type>
-	class COG_API MouseButtonEvent : public Event<type> {
+	class COG_API MouseButtonEvent : public Event {
 		public:
 		inline int GetMouseButton() const noexcept { return button; }
 
-		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+		virtual inline int category_flags() const override final {
+			return EventCategoryMouse | EventCategoryInput;
+		}
+		
 		protected:
 		MouseButtonEvent(int button_in) noexcept
 			: button(button_in) {}
@@ -58,7 +66,7 @@ namespace COG {
 		int button;
 	};
 
-	class COG_API MouseButtonPressedEvent : public MouseButtonEvent<EventType::MousePress> {
+	class COG_API MouseButtonPressedEvent : public MouseButtonEvent {
 		public:
 		MouseButtonPressedEvent(int button)	noexcept
 			: MouseButtonEvent(button) {}
@@ -67,10 +75,13 @@ namespace COG {
 			return "MouseButtonPressedEvent: " + std::to_string(button);
 		}
 
-		EVENT_CLASS_TYPE(MouseButtonPressed)
+		EVENT_CLASS_TYPE(MousePress)
+
+		static EventType static_type() { return EventType::MousePress; } 
+		virtual EventType type() const { return static_type(); }
 	};
 
-	class COG_API MouseButtonReleasedEvent : public MouseButtonEvent<EventType::MouseRelease> {
+	class COG_API MouseButtonReleasedEvent : public MouseButtonEvent {
 		public:
 		MouseButtonReleasedEvent(int button) noexcept
 			: MouseButtonEvent(button) {}
@@ -80,5 +91,8 @@ namespace COG {
 		}
 
 		EVENT_CLASS_TYPE(MouseButtonReleased)
+
+		static EventType static_type() { return EventType::MouseRelease; } 
+		virtual EventType type() const override { return static_type(); }
 	};
 }

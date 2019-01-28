@@ -4,20 +4,22 @@
 
 namespace COG {
 
-	template<EventType type>
-	class COG_API KeyEvent : public Event<type> {
+	class COG_API KeyEvent : public Event {
 		public:
 		
 		inline int keycode() const noexcept { return code; }
 
-		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
+		virtual inline int category_flags() const override final { 
+			return EventCategoryKeyboard | EventCategoryInput;
+		}
+
 		protected:
 		KeyEvent(int keycode) : code(keycode) {}
 
 		int code;
 	};
 
-	class COG_API KeyPressedEvent : public KeyEvent<EventType::KeyPressed> {
+	class COG_API KeyPressedEvent : public KeyEvent {
 		public:
 		KeyPressedEvent(int keycode, int repeatCount)
 			: KeyEvent(keycode), repeats(repeatCount) {}
@@ -31,11 +33,15 @@ namespace COG {
 		}
 
 		EVENT_CLASS_TYPE(KeyPressed)
+
+		static EventType static_type() { return EventType::KeyPressed; } 
+		virtual inline EventType type() const override { return static_type(); }
+
 		private:
 		int repeats;
 	};
 
-	class COG_API KeyReleasedEvent : public KeyEvent<EventType::KeyReleased> {
+	class COG_API KeyReleasedEvent : public KeyEvent {
 		public:
 		KeyReleasedEvent(int keycode)
 			: KeyEvent(keycode) {}
@@ -45,9 +51,12 @@ namespace COG {
 		}
 
 		EVENT_CLASS_TYPE(KeyReleased)
+
+		static EventType static_type() { return EventType::KeyReleased; }
+		virtual inline EventType type() const override { return static_type(); }
 	};
 
-	class COG_API KeyTypedEvent : public KeyEvent<EventType::KeyTyped> {
+	class COG_API KeyTypedEvent : public KeyEvent {
 		public:
 		KeyTypedEvent(int keycode)
 			: KeyEvent(keycode) {}
@@ -57,6 +66,9 @@ namespace COG {
 		}
 
 		EVENT_CLASS_TYPE(KeyTyped)
+
+		static EventType static_type() { return EventType::KeyTyped; }
+		virtual inline EventType type() const override { return static_type(); }
 	};
 
 }

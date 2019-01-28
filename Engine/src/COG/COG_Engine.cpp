@@ -7,6 +7,23 @@
 
 namespace COG {
 	
+	template<typename T>
+	static inline std::unique_ptr<T> create_window(const WindowDetails& details) {
+
+		static_assert(std::is_base_of<Window, T>(), "Cannot create a window due to a bad template!");
+		return std::make_unique<T>(details);
+	}
+
+	static inline std::unique_ptr<Window> create_window(const WindowDetails& details) {
+
+#ifdef COG_PLATFORM_WINDOWS
+		 return create_window<WindowsWindow>(details);
+#else 
+#error COG currently supports the following: Windows
+#endif // COG_PLATOFRM_WINDOWS
+
+	}
+
 	COG_Engine* COG_Engine::instance = nullptr;
 	
 	COG_Engine::COG_Engine(const WindowDetails& details) {
@@ -19,24 +36,24 @@ namespace COG {
 		instance = this;
 		running = true;
 		
-		
-#ifdef COG_PLATFORM_WINDOWS
-		window = create_window<WindowsWindow>(details);
-#else
-		#error Only Windows is currently supported!
-#endif
+		window = create_window(details);
 		window->set_callback(std::bind(&COG_Engine::on_event, this, std::placeholders::_1));
 
 		set_clear_color(0, .5, 1);
 		
 		start = time_now();
 	}
+	
 	void COG_Engine::on_event(Event & e) {
 	
-		info_internal("Dispatching " + e.str() + "...");
-		
 		EventDispatcher dispatch(e);
 		dispatch.dispatch<WindowCloseEvent>(std::bind(&COG_Engine::on_window_close, this, std::placeholders::_1));
+
+		auto it = layers.end();
+
+		while(it != layers.begin() && !e.handled) {
+			(*--it)->on_event(e);
+		}
 
 	}
 	
@@ -48,6 +65,8 @@ namespace COG {
 		while(running) {
 			  glClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]);
 			  glClear(GL_COLOR_BUFFER_BIT);
+
+			  layers.update_sweep();
 
 			  window->on_update();
 			  frame_count++;

@@ -31,13 +31,7 @@ namespace COG {
 
 		virtual inline unsigned width() const noexcept = 0;
 		virtual inline unsigned height() const noexcept = 0;
-	};
 
-	template<typename T>
-	inline std::unique_ptr<T> create_window(const WindowDetails& details){
-		
-		static_assert(std::is_base_of<Window, T>(), "T need to be a type of window!");
-		return std::make_unique<T>(details);
-	}
+	};
 
 }

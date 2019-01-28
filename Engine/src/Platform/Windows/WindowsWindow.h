@@ -6,7 +6,21 @@
 #include <GLFW/glfw3.h>
 
 namespace COG {
+	
+	struct WindowData {
+		std::string title;
+		unsigned width, height;
+		bool vsync;
 
+		Window::callback event_callback;
+
+		inline void operator=(const WindowDetails& rhs) {
+			title = rhs.title;
+			width = rhs.width;
+			height = rhs.height;
+		}
+	};
+	
 	class WindowsWindow : public Window {
 		public:
 		WindowsWindow(const WindowDetails& details);
@@ -26,19 +40,7 @@ namespace COG {
 		private:
 		GLFWwindow* window;
 
-		struct WindowData {
-		   std::string title;
-		   unsigned width, height;
-		   bool vsync;
-
-		   callback event_callback;
-
-		   inline void operator=(const WindowDetails& rhs) {
-			   title = rhs.title;
-			   width = rhs.width;
-			   height = rhs.height;
-		   }
-		} data;
+		WindowData data;
 	};
 
 	
