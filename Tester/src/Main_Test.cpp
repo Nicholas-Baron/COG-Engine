@@ -9,12 +9,20 @@ class TestLayer : public COG::Layer{
 		info("Cleaned the test layer");
 	}
 
-	virtual void detach() override {
+	virtual void on_detach() override {
 		info("Detached the test layer");
 	}
 
-	virtual void attach() override {
+	virtual void on_attach() override {
 		info("Attached the test layer");
+	}
+
+	virtual void on_event(COG::Event& e) override {
+		if(e.type() == COG::EventType::MousePress) {
+			const auto& mp = COG::event_cast<COG::MouseButtonPressedEvent>(e);
+			info(mp.mouse_button());
+			e.handled = true;
+		}
 	}
 };
 

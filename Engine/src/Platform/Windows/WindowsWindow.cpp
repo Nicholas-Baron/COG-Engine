@@ -20,7 +20,7 @@ namespace COG {
 	
 	static inline WindowData* data_cast(GLFWwindow* win) {
 		return static_cast<WindowData*>(glfwGetWindowUserPointer(win));
-	};
+	}
 
 	WindowsWindow::WindowsWindow(const WindowDetails& details_in) {
 		

@@ -96,7 +96,6 @@ class COG_API Vec2d {
 };
 
 namespace std {
-
 	inline std::string to_string(const Vec2d& val) {
 		std::stringstream stream("(");
 		stream << val.x_val() << ", " << val.y_val() << ")";

@@ -11,15 +11,17 @@ namespace COG {
 		public:
 		COG_API Layer(const std::string& name = "Layer")
 			: debug_name(name) {}
-		virtual COG_API ~Layer() {}
+		COG_API virtual ~Layer() {}
 
-		virtual void COG_API attach(){}
-		virtual void COG_API detach(){}
-		virtual void COG_API update(){}
-		virtual void COG_API on_event(Event& e){}
+		COG_API virtual void on_attach(){}
+		COG_API virtual void on_detach(){}
+		COG_API virtual void on_update(){}
+		COG_API virtual void on_event(Event& e){}
 
-		inline const COG_API std::string& name() const noexcept {
+		COG_API inline const std::string& name() const noexcept {
 			return debug_name;
 		}
 	};
+
+	
 }

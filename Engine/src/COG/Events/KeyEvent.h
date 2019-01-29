@@ -21,10 +21,10 @@ namespace COG {
 
 	class COG_API KeyPressedEvent : public KeyEvent {
 		public:
-		KeyPressedEvent(int keycode, int repeatCount)
+		KeyPressedEvent(int keycode, unsigned repeatCount)
 			: KeyEvent(keycode), repeats(repeatCount) {}
 
-		inline int GetRepeatCount() const { return repeats; }
+		inline unsigned repeat_count() const noexcept { return repeats; }
 
 		inline virtual std::string str() const override {
 			std::stringstream ss("KeyPressedEvent: ");
@@ -34,11 +34,11 @@ namespace COG {
 
 		EVENT_CLASS_TYPE(KeyPressed)
 
-		static EventType static_type() { return EventType::KeyPressed; } 
-		virtual inline EventType type() const override { return static_type(); }
+		inline static EventType static_type() noexcept { return EventType::KeyPressed; } 
+		inline virtual EventType type() const override { return static_type(); }
 
 		private:
-		int repeats;
+		unsigned repeats;
 	};
 
 	class COG_API KeyReleasedEvent : public KeyEvent {
@@ -52,8 +52,8 @@ namespace COG {
 
 		EVENT_CLASS_TYPE(KeyReleased)
 
-		static EventType static_type() { return EventType::KeyReleased; }
-		virtual inline EventType type() const override { return static_type(); }
+		inline static EventType static_type() noexcept { return EventType::KeyReleased; }
+		inline virtual EventType type() const override { return static_type(); }
 	};
 
 	class COG_API KeyTypedEvent : public KeyEvent {
@@ -67,8 +67,8 @@ namespace COG {
 
 		EVENT_CLASS_TYPE(KeyTyped)
 
-		static EventType static_type() { return EventType::KeyTyped; }
-		virtual inline EventType type() const override { return static_type(); }
+		inline static EventType static_type() noexcept { return EventType::KeyTyped; }
+		inline virtual EventType type() const override { return static_type(); }
 	};
 
 }

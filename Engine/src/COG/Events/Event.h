@@ -6,15 +6,15 @@
 
 namespace COG {
 
-	enum struct EventType : unsigned {
+	enum struct COG_API EventType : unsigned {
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
 		KeyPressed, KeyReleased, KeyTyped,
 		MousePress, MouseRelease, MouseMove, MouseScroll
-	 };
+	};
 
-	enum EventCategory : unsigned {
+	enum COG_API EventCategory : unsigned {
 		None = 0,
 		EventCategoryApplication = bit(0),
 		EventCategoryInput = bit(1),
@@ -31,7 +31,7 @@ namespace COG {
 		bool handled = false;
 
 		virtual inline EventType type() const = 0;
-		virtual const char* name() const { return "None"; }
+		virtual const char* name() const = 0;
 		virtual int category_flags() const = 0;
 		virtual inline std::string str() const { return name();  }
 		
@@ -40,6 +40,12 @@ namespace COG {
 			return category_flags() & category;
 		}
 	};
+
+	template<typename T>
+	inline T& event_cast(Event& e) {
+		static_assert(std::is_base_of<Event, T>(), "Can only cast to another event type!");
+		return dynamic_cast<T&>(e);
+	}
 
 	class EventDispatcher {
 		public:
@@ -54,7 +60,7 @@ namespace COG {
 			static_assert(std::is_base_of<Event, T>(), "Using EventDispatcher::dispatch on a non-Event child?");
 
 			if(e.type() == T::static_type()) {
-				e.handled = func(*reinterpret_cast<T*>(&e));
+				e.handled = func(event_cast<T>(e));
 				return true;
 			}
 			
@@ -68,13 +74,11 @@ namespace COG {
 }
 
 namespace std {
-	
 	inline std::string to_string(const COG::Event& e){
 		return e.str();
 	}
 }
 
-template<COG::EventType type>
 inline std::ostream& operator<<(std::ostream& lhs, const COG::Event& rhs){
 	return lhs << std::to_string(rhs);
 }

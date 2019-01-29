@@ -8,54 +8,56 @@ namespace COG {
 	
 	class COG_API MouseMovedEvent : public Event {
 		public:
-		MouseMovedEvent(float x, float y) noexcept
-			: mouseX(x), mouseY(y) {}
+		MouseMovedEvent(double x, double y) noexcept
+			: pos(x, y) {}
 
-		inline float x() const noexcept { return mouseX; }
-		inline float y() const noexcept { return mouseY; }
+		inline const Vec2d& position() const noexcept { return pos; }
+		inline double x_val() const noexcept { return pos.x_val(); }
+		inline double y_val() const noexcept { return pos.y_val(); }
 
-		inline virtual std::string str() const override {
-			std::stringstream ss("MouseMovedEvent: ");
-			ss << mouseX << ", " << mouseY;
-			return ss.str();
+		inline virtual std::string str() const override final {
+			return "MouseMovedEvent: " + std::to_string(pos);
 		}
 
 		EVENT_CLASS_TYPE(MouseMove)
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
-			static EventType static_type() { return EventType::MouseMove; } 
-			virtual EventType type() const override { return static_type(); }
+		inline static EventType static_type() noexcept { return EventType::MouseMove; } 
+		inline virtual EventType type() const override { return static_type(); }
+		
 		private:
-		float mouseX, mouseY;
+		Vec2d pos;
 	};
 
 	class COG_API MouseScrolledEvent : public Event {
+		
 		public:
-		MouseScrolledEvent(double xOffset, double yOffset) noexcept
-			: offset(xOffset, yOffset) {}
+		MouseScrolledEvent(double x_offset, double y_offset) noexcept
+			: offset_val(x_offset, y_offset) {}
 
-		inline float xOffset() const noexcept { return offset.x_val(); }
-		inline float yOffset() const noexcept { return offset.y_val(); }
+		inline const Vec2d& offset() const noexcept {return offset_val; }
+		inline double x_offset() const noexcept { return offset_val.x_val(); }
+		inline double y_offset() const noexcept { return offset_val.y_val(); }
 
 		inline virtual std::string str() const override {
-			std::stringstream ss("MouseScrolledEvent: ");
-			ss << xOffset() << ", " << yOffset();
-			return ss.str();
+			return "MouseScrolledEvent: " + std::to_string(offset_val);
 		}
 
 		EVENT_CLASS_TYPE(MouseScrolled)
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
-		static EventType static_type() { return EventType::MouseScroll; } 
-		virtual EventType type() const override final { return static_type(); }
+		
+		inline static EventType static_type() noexcept { return EventType::MouseScroll; } 
+		inline virtual EventType type() const override final { return static_type(); }
+		
 		private:
-		Vec2d offset;
+		Vec2d offset_val;
 	};
 
 	class COG_API MouseButtonEvent : public Event {
 		public:
-		inline int GetMouseButton() const noexcept { return button; }
+		inline int mouse_button() const noexcept { return button; }
 
-		virtual inline int category_flags() const override final {
+		inline virtual int category_flags() const override final {
 			return EventCategoryMouse | EventCategoryInput;
 		}
 		
@@ -77,8 +79,8 @@ namespace COG {
 
 		EVENT_CLASS_TYPE(MousePress)
 
-		static EventType static_type() { return EventType::MousePress; } 
-		virtual EventType type() const { return static_type(); }
+		inline static EventType static_type() noexcept { return EventType::MousePress; } 
+		inline virtual EventType type() const override { return static_type(); }
 	};
 
 	class COG_API MouseButtonReleasedEvent : public MouseButtonEvent {
@@ -92,7 +94,7 @@ namespace COG {
 
 		EVENT_CLASS_TYPE(MouseButtonReleased)
 
-		static EventType static_type() { return EventType::MouseRelease; } 
-		virtual EventType type() const override { return static_type(); }
+		inline static EventType static_type() noexcept { return EventType::MouseRelease; } 
+		inline virtual EventType type() const override { return static_type(); }
 	};
 }
