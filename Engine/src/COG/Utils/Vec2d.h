@@ -23,17 +23,19 @@ class COG_API Vec2d {
 	//Get values from a pair
 	constexpr inline Vec2d(const std::pair<double, double>& data) noexcept 
 		: x(data.first), y(data.second) {}
-
+	//Copy constructor
+	constexpr inline Vec2d(const Vec2d& rhs) noexcept : x(rhs.x), y(rhs.y) {};
+	
 	//Const functions
 
 	constexpr inline double x_val() const noexcept { return x; }
 	constexpr inline double y_val() const noexcept { return y; }
 
-	constexpr operator std::array<double, 2>() {
+	constexpr operator std::array<double, 2>() const noexcept {
 		return {x, y};
 	}
 
-	constexpr operator std::pair<double, double>() {
+	constexpr operator std::pair<double, double>() const noexcept {
 		return {x, y};
 	}
 
@@ -43,6 +45,10 @@ class COG_API Vec2d {
 
 	constexpr inline double dot(const Vec2d& rhs) const noexcept {
 		return x * rhs.x + y * rhs.y;
+	}
+
+	constexpr inline double sqr_distance(const Vec2d& rhs) const noexcept {
+		return (rhs - *this).sqr_magnitude();
 	}
 
 	//Operator overloads (const at top)
@@ -92,6 +98,10 @@ class COG_API Vec2d {
 	constexpr inline void operator/=(double rhs) {
 		x /= rhs;
 		y /= rhs;
+	}
+
+	constexpr inline bool operator==(const Vec2d& rhs) const {
+		return rhs.x == x && rhs.y == y;
 	}
 };
 

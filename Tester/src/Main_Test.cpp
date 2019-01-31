@@ -19,8 +19,14 @@ class TestLayer : public COG::Layer{
 
 	virtual void on_event(COG::Event& e) override {
 		if(e.type() == COG::EventType::MousePress) {
+			//Mouse press
 			const auto& mp = COG::event_cast<COG::MouseButtonPressedEvent>(e);
 			info(mp.mouse_button());
+			e.handled = true;
+		} else if(e.type() == COG::EventType::KeyTyped) {
+			//Key Press
+			const auto& kp = COG::event_cast<COG::KeyTypedEvent>(e);
+			info(kp.keycode());
 			e.handled = true;
 		}
 	}

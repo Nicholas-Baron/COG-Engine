@@ -5,19 +5,19 @@
 	
 	void LayerStack::push_layer(std::shared_ptr<Layer> layer){
 		insert = layers.emplace(insert, layer);
-		layer->on_attach();
+		(*insert)->on_attach();			//insert is an iterator
 	}
 
 	void LayerStack::push_overlay(std::shared_ptr<Layer> overlay) {
 		layers.emplace_back(overlay);
-		overlay->on_attach();
+		layers.back()->on_attach();
 	}
 	
 	void LayerStack::remove_layer(std::shared_ptr<Layer> layer) {
 
 		auto loc = std::find(layers.begin(), layers.end(), layer);
 		if(loc != layers.end()) {
-			loc->operator->()->on_detach();
+			(*loc)->on_detach();
 			layers.erase(loc);
 			insert--;
 		}
@@ -27,7 +27,7 @@
 	
 		auto loc = std::find(layers.begin(), layers.end(), overlay);
 		if(loc != layers.end()) {
-			loc->operator->()->on_detach();
+			(*loc)->on_detach(); //loc is an iterator
 			layers.erase(loc);
 		}
 	}
@@ -35,7 +35,7 @@
 	void LayerStack::update_sweep() {
 
 		for(auto& layer : layers){
-			layer.operator->()->on_update();
+			layer->on_update();
 		}
 	}
 }

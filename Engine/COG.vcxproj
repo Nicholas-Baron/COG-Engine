@@ -300,7 +300,6 @@
     <ClInclude Include="src\COG.h" />
     <ClInclude Include="src\COG\COG_Engine.h" />
     <ClInclude Include="src\COG\Core.h" />
-    <ClInclude Include="src\COG\Entry_Point.h" />
     <ClInclude Include="src\COG\Events\AppEvent.h" />
     <ClInclude Include="src\COG\Events\Event.h" />
     <ClInclude Include="src\COG\Events\KeyEvent.h" />

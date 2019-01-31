@@ -36,7 +36,7 @@ class COG_API Vec3d {
 	constexpr inline Vec2d xz() const noexcept { return Vec2d(x, z); }
 	constexpr inline Vec2d yz() const noexcept { return Vec2d(y, z); }
 
-	constexpr operator std::array<double, 3>(){
+	constexpr operator std::array<double, 3>() const noexcept {
 		return {x, y, z};
 	}
 	
@@ -50,6 +50,10 @@ class COG_API Vec3d {
 
 	constexpr inline Vec3d cross(const Vec3d& rhs) const noexcept {
 		return Vec3d(y*rhs.z - z*rhs.y, z*rhs.x - x*rhs.z, x*rhs.y - y*rhs.x);
+	}
+
+	constexpr inline double sqr_distance(const Vec3d& rhs) const noexcept {
+		return (rhs - *this).sqr_magnitude();
 	}
 
 	//Operator overloads (const at top)

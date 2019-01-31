@@ -29,8 +29,8 @@ namespace COG {
 		using callback = std::function<void(Event&)>;
 		inline virtual void set_callback(const callback& callback) = 0;
 
-		virtual inline unsigned width() const noexcept = 0;
-		virtual inline unsigned height() const noexcept = 0;
+		inline virtual unsigned width() const noexcept = 0;
+		inline virtual unsigned height() const noexcept = 0;
 
 	};
 
