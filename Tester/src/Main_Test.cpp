@@ -26,8 +26,8 @@ class TestLayer : public COG::Layer{
 		} else if(e.type() == COG::EventType::KeyTyped) {
 			//Key Press
 			const auto& kp = COG::event_cast<COG::KeyTypedEvent>(e);
-			info(kp.keycode());
 			e.handled = true;
+			info(kp.keycode());
 		}
 	}
 };

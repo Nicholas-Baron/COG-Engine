@@ -15,6 +15,8 @@ output = "%{cfg.buildcfg}_%{cfg.system}_%{cfg.architecture}"
 IncludeDirs = {}
 IncludeDirs["GLAD"] = "Engine/vendor/GLAD/include"
 IncludeDirs["GLFW"] = "Engine/vendor/GLFW/include"
+IncludeDirs["glm"] = "Engine/vendor/glm"
+IncludeDirs["spdlog"] = "Engine/vendor/spdlog/include"
 
 include "Engine/vendor/GLAD"
 include "Engine/vendor/GLFW"
@@ -37,10 +39,11 @@ project "COG"
 	}
 	
 	includedirs{ 
-		"%{prj.location}/vendor/spdlog/include",
+		"%{IncludeDirs.spdlog}",
 		"%{prj.location}/src",
 		"%{IncludeDirs.GLAD}",
-		"%{IncludeDirs.GLFW}"
+		"%{IncludeDirs.GLFW}",
+		"%{IncludeDirs.glm}"
 	}
 	
 	links{

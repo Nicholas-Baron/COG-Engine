@@ -13,6 +13,7 @@
 #include <vector>
 
 //IO Stuff
+#include <fstream>
 #include <iomanip>
 #include <iostream>
 

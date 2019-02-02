@@ -220,3 +220,15 @@ Tester/temp/
 *.tlog
 
 *.idb
+
+Engine/vendor/glm/doc/api/
+
+*.yml
+
+*.doxy
+
+*.in
+
+Engine/vendor/glm/doc/manual\.pdf
+
+Engine/vendor/glm/doc/manual/

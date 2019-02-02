@@ -1,7 +1,5 @@
 #pragma once
 
-#include "precomp/precomp.h"
-
 #ifdef COG_PLATFORM_WINDOWS
 	#ifdef COG_BUILD_DLL
         #define COG_API __declspec(dllexport)
