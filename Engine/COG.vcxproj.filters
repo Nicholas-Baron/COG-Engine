@@ -76,6 +76,10 @@
     <ClInclude Include="src\precomp\precomp.h">
       <Filter>precomp</Filter>
     </ClInclude>
+    <ClInclude Include="src\COG\Game Content\Model.h" />
+    <ClInclude Include="src\COG\Game Content\Rendering\Shader.h" />
+    <ClInclude Include="src\COG\Game Content\Rendering\RenderUtil.h" />
+    <ClInclude Include="src\COG\Utils\TextUtil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\COG\COG_Engine.cpp">
@@ -93,5 +97,7 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\COG\Game Content\Rendering\Shader.cpp" />
+    <ClCompile Include="src\COG\Utils\TextUtil.cpp" />
   </ItemGroup>
 </Project>

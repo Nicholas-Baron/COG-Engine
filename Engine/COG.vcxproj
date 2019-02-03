@@ -303,9 +303,13 @@
     <ClInclude Include="src\COG\Events\KeyEvent.h" />
     <ClInclude Include="src\COG\Events\MouseEvent.h" />
     <ClInclude Include="src\COG\Game Content\Game_Object.h" />
+    <ClInclude Include="src\COG\Game Content\Model.h" />
+    <ClInclude Include="src\COG\Game Content\Rendering\RenderUtil.h" />
+    <ClInclude Include="src\COG\Game Content\Rendering\Shader.h" />
     <ClInclude Include="src\COG\Layering\Layer.h" />
     <ClInclude Include="src\COG\Layering\LayerStack.h" />
     <ClInclude Include="src\COG\Log.h" />
+    <ClInclude Include="src\COG\Utils\TextUtil.h" />
     <ClInclude Include="src\COG\Utils\Vec2d.h" />
     <ClInclude Include="src\COG\Utils\Vec3d.h" />
     <ClInclude Include="src\COG\Version.h" />
@@ -315,11 +319,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\COG\COG_Engine.cpp" />
+    <ClCompile Include="src\COG\Game Content\Rendering\Shader.cpp" />
     <ClCompile Include="src\COG\Layering\LayerStack.cpp" />
     <ClCompile Include="src\COG\Log.cpp" />
     <ClCompile Include="src\COG\precomp.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\COG\Utils\TextUtil.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
