@@ -164,7 +164,7 @@
       <PrecompiledHeaderFile>precomp/precomp.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>COG_PLATFORM_WINDOWS;COG_BUILD_DLL;COG_DEBUG;COG_ENABLE_ASSERTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLAD\include;vendor\GLFW\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLAD\include;vendor\GLFW\include;vendor\glm;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -184,7 +184,7 @@
       <PrecompiledHeaderFile>precomp/precomp.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>COG_PLATFORM_WINDOWS;COG_BUILD_DLL;COG_DEBUG;COG_ENABLE_ASSERTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLAD\include;vendor\GLFW\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLAD\include;vendor\GLFW\include;vendor\glm;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -204,7 +204,7 @@
       <PrecompiledHeaderFile>precomp/precomp.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>COG_PLATFORM_WINDOWS;COG_BUILD_DLL;COG_RELEASE;COG_ENABLE_ASSERTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLAD\include;vendor\GLFW\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLAD\include;vendor\GLFW\include;vendor\glm;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -228,7 +228,7 @@
       <PrecompiledHeaderFile>precomp/precomp.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>COG_PLATFORM_WINDOWS;COG_BUILD_DLL;COG_RELEASE;COG_ENABLE_ASSERTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLAD\include;vendor\GLFW\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLAD\include;vendor\GLFW\include;vendor\glm;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -252,7 +252,7 @@
       <PrecompiledHeaderFile>precomp/precomp.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>COG_PLATFORM_WINDOWS;COG_BUILD_DLL;COG_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLAD\include;vendor\GLFW\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLAD\include;vendor\GLFW\include;vendor\glm;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -276,7 +276,7 @@
       <PrecompiledHeaderFile>precomp/precomp.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>COG_PLATFORM_WINDOWS;COG_BUILD_DLL;COG_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLAD\include;vendor\GLFW\include;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLAD\include;vendor\GLFW\include;vendor\glm;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -306,6 +306,7 @@
     <ClInclude Include="src\COG\Game Content\Model.h" />
     <ClInclude Include="src\COG\Game Content\Rendering\RenderUtil.h" />
     <ClInclude Include="src\COG\Game Content\Rendering\Shader.h" />
+    <ClInclude Include="src\COG\Game Content\Rendering\Texture.h" />
     <ClInclude Include="src\COG\Layering\Layer.h" />
     <ClInclude Include="src\COG\Layering\LayerStack.h" />
     <ClInclude Include="src\COG\Log.h" />
@@ -320,12 +321,13 @@
   <ItemGroup>
     <ClCompile Include="src\COG\COG_Engine.cpp" />
     <ClCompile Include="src\COG\Game Content\Rendering\Shader.cpp" />
+    <ClCompile Include="src\COG\Game Content\Rendering\Texture.cpp" />
     <ClCompile Include="src\COG\Layering\LayerStack.cpp" />
     <ClCompile Include="src\COG\Log.cpp" />
+    <ClCompile Include="src\COG\Utils\TextUtil.cpp" />
     <ClCompile Include="src\COG\precomp.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\COG\Utils\TextUtil.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>

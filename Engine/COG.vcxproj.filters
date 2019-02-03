@@ -10,6 +10,9 @@
     <Filter Include="COG\Game Content">
       <UniqueIdentifier>{E2F5E6D5-CEEE-0528-F720-EBACE378E533}</UniqueIdentifier>
     </Filter>
+    <Filter Include="COG\Game Content\Rendering">
+      <UniqueIdentifier>{AF01A9AA-9B11-557B-04CB-B999F0F94314}</UniqueIdentifier>
+    </Filter>
     <Filter Include="COG\Layering">
       <UniqueIdentifier>{A88AB741-94ED-46E6-3D73-7F9C29B51269}</UniqueIdentifier>
     </Filter>
@@ -49,6 +52,18 @@
     <ClInclude Include="src\COG\Game Content\Game_Object.h">
       <Filter>COG\Game Content</Filter>
     </ClInclude>
+    <ClInclude Include="src\COG\Game Content\Model.h">
+      <Filter>COG\Game Content</Filter>
+    </ClInclude>
+    <ClInclude Include="src\COG\Game Content\Rendering\RenderUtil.h">
+      <Filter>COG\Game Content\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\COG\Game Content\Rendering\Shader.h">
+      <Filter>COG\Game Content\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\COG\Game Content\Rendering\Texture.h">
+      <Filter>COG\Game Content\Rendering</Filter>
+    </ClInclude>
     <ClInclude Include="src\COG\Layering\Layer.h">
       <Filter>COG\Layering</Filter>
     </ClInclude>
@@ -57,6 +72,9 @@
     </ClInclude>
     <ClInclude Include="src\COG\Log.h">
       <Filter>COG</Filter>
+    </ClInclude>
+    <ClInclude Include="src\COG\Utils\TextUtil.h">
+      <Filter>COG\Utils</Filter>
     </ClInclude>
     <ClInclude Include="src\COG\Utils\Vec2d.h">
       <Filter>COG\Utils</Filter>
@@ -76,14 +94,16 @@
     <ClInclude Include="src\precomp\precomp.h">
       <Filter>precomp</Filter>
     </ClInclude>
-    <ClInclude Include="src\COG\Game Content\Model.h" />
-    <ClInclude Include="src\COG\Game Content\Rendering\Shader.h" />
-    <ClInclude Include="src\COG\Game Content\Rendering\RenderUtil.h" />
-    <ClInclude Include="src\COG\Utils\TextUtil.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\COG\COG_Engine.cpp">
       <Filter>COG</Filter>
+    </ClCompile>
+    <ClCompile Include="src\COG\Game Content\Rendering\Shader.cpp">
+      <Filter>COG\Game Content\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\COG\Game Content\Rendering\Texture.cpp">
+      <Filter>COG\Game Content\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\COG\Layering\LayerStack.cpp">
       <Filter>COG\Layering</Filter>
@@ -91,13 +111,14 @@
     <ClCompile Include="src\COG\Log.cpp">
       <Filter>COG</Filter>
     </ClCompile>
+    <ClCompile Include="src\COG\Utils\TextUtil.cpp">
+      <Filter>COG\Utils</Filter>
+    </ClCompile>
     <ClCompile Include="src\COG\precomp.cpp">
       <Filter>COG</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\COG\Game Content\Rendering\Shader.cpp" />
-    <ClCompile Include="src\COG\Utils\TextUtil.cpp" />
   </ItemGroup>
 </Project>

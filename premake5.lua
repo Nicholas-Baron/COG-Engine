@@ -17,6 +17,7 @@ IncludeDirs["GLAD"] = "Engine/vendor/GLAD/include"
 IncludeDirs["GLFW"] = "Engine/vendor/GLFW/include"
 IncludeDirs["glm"] = "Engine/vendor/glm"
 IncludeDirs["spdlog"] = "Engine/vendor/spdlog/include"
+IncludeDirs["stb"] = "Engine/vendor/stb"
 
 include "Engine/vendor/GLAD"
 include "Engine/vendor/GLFW"
@@ -43,7 +44,8 @@ project "COG"
 		"%{prj.location}/src",
 		"%{IncludeDirs.GLAD}",
 		"%{IncludeDirs.GLFW}",
-		"%{IncludeDirs.glm}"
+		"%{IncludeDirs.glm}",
+		"%{IncludeDirs.stb}"
 	}
 	
 	links{
