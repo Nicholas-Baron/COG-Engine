@@ -2,9 +2,9 @@
 
 #include "precomp/precomp.h"
 
-#include "RenderUtil.h"
 
-#include "glad/glad.h"
+
+
 
 namespace COG {
 
@@ -21,7 +21,7 @@ namespace COG {
 		~Texture();
 
 		 void bind(unsigned slot = 0) const;
-		 inline void unbind() const { GLCALL(glBindTexture(GL_TEXTURE_2D, 0)); }
+		 void unbind() const;
 
 		 inline int width() const { return m_width; }
 		 inline int height() const { return m_height; }

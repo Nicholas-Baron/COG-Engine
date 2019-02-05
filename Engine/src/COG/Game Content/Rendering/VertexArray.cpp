@@ -23,8 +23,8 @@ void COG::VertexArray::add_buffer(const VertexBuffer * vb, const VertexBufferLay
 		const auto& e = elements[i];
 		GLCALL(glEnableVertexAttribArray(i));
 		GLCALL(glVertexAttribPointer(i, e.count, e.type, 
-			   e.normalized ? GL_TRUE : GL_FALSE, layout->stride(), 
-			   reinterpret_cast<const void*>(offset)));
+			   e.normalized, layout->stride(), 
+			   reinterpret_cast<GLvoid*>(offset)));
 
 		offset += e.count * VertexElement::size_of_type(e.type);
 	}

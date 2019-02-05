@@ -15,6 +15,11 @@ namespace COG{
 
 		public:
 		LayerStack() : insert(layers.begin()){}
+		~LayerStack() {
+			for(auto i = begin(); i != end(); i++) {
+				(*i)->on_detach();
+			}
+		}
 
 		COG_API void push_layer(std::shared_ptr<Layer> layer);
 		COG_API void push_overlay(std::shared_ptr<Layer> layer);
@@ -25,9 +30,7 @@ namespace COG{
 		COG_API iterator begin() { return layers.begin(); }
 		COG_API iterator end() { return layers.end(); }
 		
-		void update_sweep();
-
-
+		void update_sweep(double delta);
 	};
 
 }

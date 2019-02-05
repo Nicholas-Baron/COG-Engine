@@ -13,7 +13,8 @@ namespace COG {
 		inline unsigned count() const noexcept { return m_count; }
 
 		private:
-		unsigned renderer_id, m_count;
+		unsigned renderer_id; 
+		unsigned m_count;
 	};
 
 }

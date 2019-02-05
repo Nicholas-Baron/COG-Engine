@@ -8,6 +8,8 @@
 #include "COG/Log.h"
 #include "COG/Version.h"
 #include "COG/Layering/Layer.h"
+#include "COG/Game Content/Game_Object.h"
+#include "COG/Game Content/RenderResourceManager.h"
 
 //Event System
 #include "COG/Events/Event.h"

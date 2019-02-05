@@ -7,12 +7,13 @@
 #include "glad/glad.h"
 
 namespace COG {
-	IndexBuffer::IndexBuffer(unsigned * data, unsigned count) {
+	IndexBuffer::IndexBuffer(unsigned * data, unsigned count) : m_count(count) {
 		COG_ASSERT_INTERNAL(sizeof(unsigned) == sizeof(GLuint));
+		COG_ASSERT_INTERNAL(m_count > 0);
 
 		GLCALL(glGenBuffers(1, &renderer_id));
 		GLCALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderer_id));
-		GLCALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(unsigned), data, GL_STATIC_DRAW));
+		GLCALL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_count * sizeof(unsigned), data, GL_STATIC_DRAW));
 	}
 
 	IndexBuffer::~IndexBuffer() {

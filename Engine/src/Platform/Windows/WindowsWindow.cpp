@@ -34,8 +34,8 @@ namespace COG {
 			glfw_ready = true;
 		}
 
-		info_internal("GLFW is ready.");
-
+		info_internal("GLFW Version: " + std::string(glfwGetVersionString()));
+				
 		window = glfwCreateWindow(data.width, data.height, data.title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(window);
 		COG_ASSERT_INTERNAL(gladLoadGLLoader((GLADloadproc) glfwGetProcAddress), "Failed to init GLAD!");

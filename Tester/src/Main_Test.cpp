@@ -1,6 +1,8 @@
 #include <COG.h>
 
 class TestLayer : public COG::Layer{
+	
+	COG::Game_Object teapot;
 
 	public:
 	TestLayer() : Layer("Test Layer") {}
@@ -11,10 +13,21 @@ class TestLayer : public COG::Layer{
 
 	virtual void on_detach() override {
 		info("Detached the test layer");
+		teapot.~Game_Object();
+		COG::RenderResourceManager::unload_model("teapot");
+		COG::RenderResourceManager::unload_shader("basic");
 	}
 
 	virtual void on_attach() override {
 		info("Attached the test layer");
+		COG::RenderResourceManager::load_model("res/models/teapot.obj", "teapot");
+		COG::RenderResourceManager::load_shader("res/shaders/basic.shader", "basic");
+	
+		teapot = COG::Game_Object("teapot", "basic");
+	}
+
+	virtual void on_update(double delta) override{	
+		teapot.update(delta);
 	}
 
 	virtual void on_event(COG::Event& e) override {

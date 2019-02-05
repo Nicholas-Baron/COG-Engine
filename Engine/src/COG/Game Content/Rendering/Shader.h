@@ -2,10 +2,7 @@
 
 #include "precomp/precomp.h"
 
-#include "RenderUtil.h"
-
-#include "glm/glm.hpp"
-#include "glad/glad.h"
+#include "COG/Core.h"
 
 namespace COG {
 
@@ -25,14 +22,14 @@ namespace COG {
 
 		public:
 		Shader(const std::string& filename);
-		inline ~Shader() { glDeleteProgram(shader_id); }
+		~Shader();
 
-		inline void use() const { GLCALL(glUseProgram(shader_id)); }
+		COG_API void use() const;
 
-		void setUniform1f(const std::string& name, float val = 0);
-		void setUniform1i(const std::string& name, int val = 0);
-		void setUniform4f(const std::string& name, float a, float b, float c, float d);
-		void setUniformMat4f(const std::string& name, const glm::mat4& matrix);
+		COG_API void setUniform1f(const std::string& name, float val = 0);
+		COG_API void setUniform1i(const std::string& name, int val = 0);
+		COG_API void setUniform4f(const std::string& name, float a, float b, float c, float d);
+		//void setUniformMat4f(const std::string& name, const glm::mat4& matrix);
 
 		inline unsigned renderer_id() const { return shader_id; }
 	};

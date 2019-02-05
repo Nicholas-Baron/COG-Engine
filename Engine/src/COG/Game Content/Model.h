@@ -7,6 +7,26 @@
 #include "Rendering/Buffers/IndexBuffer.h"
 
 namespace COG {
+	template<typename T>
+	struct EZ_Array{
+		T* data;
+		unsigned size;
+
+		EZ_Array() noexcept : size(0), data(nullptr) {}
+
+		EZ_Array(unsigned size_in) : size(size_in){
+			data = new T[size];
+		}
+
+		~EZ_Array() {
+			//delete[] data;
+		}
+
+		T& operator[](unsigned pos) {
+			return data[pos];
+		}
+	};
+	
 	class Model {
 		private:
 		bool is3D;
@@ -14,8 +34,8 @@ namespace COG {
 		//Multiply to normalize the model size
 		float normal_factor = 0;
 
-		std::vector<float> vertex_buffer;
-		std::vector<unsigned> indicies;
+		EZ_Array<float> vertex_buffer;
+		EZ_Array<unsigned> indicies;
 
 		std::unique_ptr<COG::VertexArray> va;
 		std::unique_ptr<COG::VertexBuffer> vb;
@@ -26,7 +46,6 @@ namespace COG {
 
 		public:
 		Model(const std::string& file, bool is3D = false);
-		inline ~Model() noexcept { clean_data(); }
 
 		//Scale by this to get all vertecies at most 1 magnitude.
 		inline float scale_factor() const noexcept { return normal_factor; }
@@ -34,6 +53,6 @@ namespace COG {
 
 		bool load_square(float sideLength, bool textured = false);
 		bool load_model(const std::string& file);
-		void draw() const;
+		COG_API void draw() const;
 	};
 }

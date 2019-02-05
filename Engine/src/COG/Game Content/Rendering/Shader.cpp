@@ -3,9 +3,20 @@
 
 #include "COG/Utils/TextUtil.h"
 
+#include "RenderUtil.h"
+
+#include "glm/glm.hpp"
+
 namespace COG {
 
 	Shader::Shader(const std::string& filename) {
+
+		info_internal("OpenGL Version:");
+		GLCALL(info_internal(glGetString(GL_VERSION)));
+		
+		info_internal("OpenGL Shader Version:");
+		info_internal(glGetString(GL_SHADING_LANGUAGE_VERSION));
+
 		auto source = parse(filename);
 		shader_id = create(source);
 
@@ -27,6 +38,10 @@ namespace COG {
 		return location;
 	}
 
+	Shader::~Shader() { glDeleteProgram(shader_id); }
+
+	void Shader::use() const { GLCALL(glUseProgram(shader_id)); }
+
 	void Shader::setUniform1f(const std::string & name, float val) {
 		GLCALL(glUniform1f(uniform_loc(name), val));
 	}
@@ -39,10 +54,10 @@ namespace COG {
 		GLCALL(glUniform4f(uniform_loc(name), a, b, c, d));
 	}
 
-	void Shader::setUniformMat4f(const std::string & name, const glm::mat4 & matrix) {
+	/*void Shader::setUniformMat4f(const std::string & name, const glm::mat4 & matrix) {
 		GLCALL(glUniformMatrix4fv(uniform_loc(name), 1, GL_FALSE, &matrix[0][0]));
 	}
-
+	  */
 	ShaderProgramSource Shader::parse(const std::string& file_path) {
 		using namespace std;
 		vector<string> shaderText;

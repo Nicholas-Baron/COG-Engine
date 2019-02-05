@@ -28,6 +28,10 @@ namespace COG{
 		public:
 		COG_API COG_Engine(const WindowDetails& details = WindowDetails());
 		
+		inline ~COG_Engine() {
+			window->destroy();
+		}
+
 		COG_API inline unsigned frame_count() const noexcept { 
 			return last_second_frames;
 		}

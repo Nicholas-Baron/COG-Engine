@@ -302,6 +302,13 @@
       <Project>{5EDA870B-CAE3-877C-535F-9E7CBF67937C}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\basic.shader" />
+    <None Include="res\shaders\textured.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\textures\test.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

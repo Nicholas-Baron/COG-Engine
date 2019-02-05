@@ -32,10 +32,10 @@
 		}
 	}
 	
-	void LayerStack::update_sweep() {
+	void LayerStack::update_sweep(double delta) {
 
 		for(auto& layer : layers){
-			layer->on_update();
+			layer->on_update(delta);
 		}
 	}
 }

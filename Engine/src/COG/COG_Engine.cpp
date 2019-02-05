@@ -37,10 +37,14 @@ namespace COG {
 		running = true;
 		
 		window = create_window(details);
+
+		info_internal("Setting main event callback...")	;
 		window->set_callback(std::bind(&COG_Engine::on_event, this, std::placeholders::_1));
 
 		set_clear_color(0, .5, 1);
 		
+		info_internal("Starting engine...");
+
 		start = time_now();
 	}
 	
@@ -60,17 +64,19 @@ namespace COG {
 	void COG_Engine::run() {
 		
 		unsigned frame_count = 0;
-		double previous_time = glfwGetTime();
+		double previous_time = glfwGetTime(), last_update = glfwGetTime();
 
 		while(running) {
 			  glClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]);
 			  glClear(GL_COLOR_BUFFER_BIT);
 
-			  layers.update_sweep();
+			  const double current_time = glfwGetTime();
+
+			  layers.update_sweep(current_time - last_update);
+			  last_update = current_time;
 
 			  window->on_update();
 			  frame_count++;
-			  const double current_time = glfwGetTime();
 
 			  if(current_time-previous_time>=1) {
 				  
@@ -84,7 +90,7 @@ namespace COG {
 				  previous_time = current_time;
 			  }
 		}
-		window->destroy();
+		
 	}
 
 	inline bool COG_Engine::on_window_close(WindowCloseEvent & e) {

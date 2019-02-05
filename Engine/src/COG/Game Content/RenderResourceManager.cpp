@@ -10,13 +10,13 @@ namespace COG {
 	std::unordered_map<std::string, std::shared_ptr<Texture>> RRM::textures_loaded{};
 
 	void RRM::load_model(const std::string& source, const std::string& name) {
-		models_loaded.emplace(name, std::make_shared<Model>(source));
+		models_loaded.insert(std::make_pair(name, std::make_shared<Model>(source)));
 	}
 	void RRM::load_shader(const std::string& source, const std::string& name) {
-		shaders_loaded.emplace(name, std::make_shared<Shader>(source));
+		shaders_loaded.insert(std::make_pair(name, std::make_shared<Shader>(source)));
 	}
 	void RRM::load_texture(const std::string& source, const std::string& name) {
-		textures_loaded.emplace(name, std::make_shared<Texture>(source));
+		textures_loaded.insert(std::make_pair(name, std::make_shared<Texture>(source)));
 	}
 
 	std::shared_ptr<Model> RRM::get_model(const std::string& name) {

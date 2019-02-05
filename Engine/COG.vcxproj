@@ -330,6 +330,7 @@
     <ClCompile Include="src\COG\Game Content\Model.cpp" />
     <ClCompile Include="src\COG\Game Content\Rendering\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="src\COG\Game Content\Rendering\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="src\COG\Game Content\Rendering\Buffers\VertexBufferLayout.cpp" />
     <ClCompile Include="src\COG\Game Content\RenderResourceManager.cpp" />
     <ClCompile Include="src\COG\Game Content\Rendering\Shader.cpp" />
     <ClCompile Include="src\COG\Game Content\Rendering\Texture.cpp" />

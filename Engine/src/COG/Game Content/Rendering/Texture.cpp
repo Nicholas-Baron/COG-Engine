@@ -4,6 +4,8 @@
 
 #include "COG/Log.h"
 
+#include "RenderUtil.h"
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
 
@@ -51,6 +53,10 @@ namespace COG {
 	
 		GLCALL(glActiveTexture(GL_TEXTURE0 + slot));
 		GLCALL(glBindTexture(GL_TEXTURE_2D, id));
+	}
+
+	void Texture::unbind() const {
+		GLCALL(glBindTexture(GL_TEXTURE_2D, 0)); 
 	}
 
 }

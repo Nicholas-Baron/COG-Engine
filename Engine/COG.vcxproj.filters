@@ -152,5 +152,6 @@
     <ClCompile Include="src\COG\Game Content\Game_Object.cpp" />
     <ClCompile Include="vendor\stb\stb\stb_image.cpp" />
     <ClCompile Include="src\COG\Game Content\RenderResourceManager.cpp" />
+    <ClCompile Include="src\COG\Game Content\Rendering\Buffers\VertexBufferLayout.cpp" />
   </ItemGroup>
 </Project>
