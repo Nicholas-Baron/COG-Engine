@@ -34,7 +34,7 @@ namespace COG {
 		void setUniform4f(const std::string& name, float a, float b, float c, float d);
 		void setUniformMat4f(const std::string& name, const glm::mat4& matrix);
 
-		inline unsigned renderer_id() const { return m_shaderID; }
+		inline unsigned renderer_id() const { return shader_id; }
 	};
 
 }

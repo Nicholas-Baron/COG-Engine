@@ -13,6 +13,9 @@
     <Filter Include="COG\Game Content\Rendering">
       <UniqueIdentifier>{AF01A9AA-9B11-557B-04CB-B999F0F94314}</UniqueIdentifier>
     </Filter>
+    <Filter Include="COG\Game Content\Rendering\Buffers">
+      <UniqueIdentifier>{2B0020B2-173C-231C-804E-3B136CA9CB36}</UniqueIdentifier>
+    </Filter>
     <Filter Include="COG\Layering">
       <UniqueIdentifier>{A88AB741-94ED-46E6-3D73-7F9C29B51269}</UniqueIdentifier>
     </Filter>
@@ -55,6 +58,15 @@
     <ClInclude Include="src\COG\Game Content\Model.h">
       <Filter>COG\Game Content</Filter>
     </ClInclude>
+    <ClInclude Include="src\COG\Game Content\Rendering\Buffers\IndexBuffer.h">
+      <Filter>COG\Game Content\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\COG\Game Content\Rendering\Buffers\VertexBuffer.h">
+      <Filter>COG\Game Content\Rendering\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\COG\Game Content\Rendering\Buffers\VertexBufferLayout.h">
+      <Filter>COG\Game Content\Rendering\Buffers</Filter>
+    </ClInclude>
     <ClInclude Include="src\COG\Game Content\Rendering\RenderUtil.h">
       <Filter>COG\Game Content\Rendering</Filter>
     </ClInclude>
@@ -62,6 +74,9 @@
       <Filter>COG\Game Content\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\COG\Game Content\Rendering\Texture.h">
+      <Filter>COG\Game Content\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="src\COG\Game Content\Rendering\VertexArray.h">
       <Filter>COG\Game Content\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="src\COG\Layering\Layer.h">
@@ -94,15 +109,29 @@
     <ClInclude Include="src\precomp\precomp.h">
       <Filter>precomp</Filter>
     </ClInclude>
+    <ClInclude Include="src\COG\Game Content\RenderResourceManager.h" />
+    <ClInclude Include="vendor\stb\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\COG\COG_Engine.cpp">
       <Filter>COG</Filter>
     </ClCompile>
+    <ClCompile Include="src\COG\Game Content\Model.cpp">
+      <Filter>COG\Game Content</Filter>
+    </ClCompile>
+    <ClCompile Include="src\COG\Game Content\Rendering\Buffers\IndexBuffer.cpp">
+      <Filter>COG\Game Content\Rendering\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\COG\Game Content\Rendering\Buffers\VertexBuffer.cpp">
+      <Filter>COG\Game Content\Rendering\Buffers</Filter>
+    </ClCompile>
     <ClCompile Include="src\COG\Game Content\Rendering\Shader.cpp">
       <Filter>COG\Game Content\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\COG\Game Content\Rendering\Texture.cpp">
+      <Filter>COG\Game Content\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\COG\Game Content\Rendering\VertexArray.cpp">
       <Filter>COG\Game Content\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="src\COG\Layering\LayerStack.cpp">
@@ -120,5 +149,8 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\COG\Game Content\Game_Object.cpp" />
+    <ClCompile Include="vendor\stb\stb\stb_image.cpp" />
+    <ClCompile Include="src\COG\Game Content\RenderResourceManager.cpp" />
   </ItemGroup>
 </Project>

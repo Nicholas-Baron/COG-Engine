@@ -18,6 +18,7 @@ IncludeDirs["GLFW"] = "Engine/vendor/GLFW/include"
 IncludeDirs["glm"] = "Engine/vendor/glm"
 IncludeDirs["spdlog"] = "Engine/vendor/spdlog/include"
 IncludeDirs["stb"] = "Engine/vendor/stb"
+IncludeDirs["obj_loader"] = "Engine/vendor/obj_loader"
 
 include "Engine/vendor/GLAD"
 include "Engine/vendor/GLFW"
@@ -45,7 +46,8 @@ project "COG"
 		"%{IncludeDirs.GLAD}",
 		"%{IncludeDirs.GLFW}",
 		"%{IncludeDirs.glm}",
-		"%{IncludeDirs.stb}"
+		"%{IncludeDirs.stb}",
+		"%{IncludeDirs.obj_loader}"
 	}
 	
 	links{
