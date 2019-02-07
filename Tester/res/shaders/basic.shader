@@ -3,10 +3,10 @@
 
 layout(location = 0) in vec4 position;
 
-//uniform mat4 u_MVP;
+uniform mat4 u_mvp;
 
 void main() {
-	gl_Position = position;
+	gl_Position = position * u_mvp;
 };
 
 #shader fragment
@@ -14,8 +14,8 @@ void main() {
 
 out vec4 color;
 
-uniform vec4 u_Color;
+uniform vec4 u_color;
 
 void main() {
-	color = u_Color;
+	color = u_color;
 };

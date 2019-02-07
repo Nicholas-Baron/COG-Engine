@@ -13,15 +13,15 @@ namespace COG {
 	class Shader {
 		private:
 		unsigned shader_id;
+		bool use_mvp;
 		std::unordered_map<std::string, int> uniform_cache;
 		
 		ShaderProgramSource parse(const std::string& file_path);
 		unsigned compile(unsigned type, const std::string& src);
 		unsigned create(const ShaderProgramSource& src);
-		int uniform_loc(const std::string& name);
-
+		
 		public:
-		Shader(const std::string& filename);
+		Shader(const std::string& filename, bool mvp);
 		~Shader();
 
 		COG_API void use() const;
@@ -29,8 +29,9 @@ namespace COG {
 		COG_API void setUniform1f(const std::string& name, float val = 0);
 		COG_API void setUniform1i(const std::string& name, int val = 0);
 		COG_API void setUniform4f(const std::string& name, float a, float b, float c, float d);
-		//void setUniformMat4f(const std::string& name, const glm::mat4& matrix);
 
+		int uniform_loc(const std::string& name);
+		inline bool uses_mvp() const noexcept { return use_mvp; }
 		inline unsigned renderer_id() const { return shader_id; }
 	};
 

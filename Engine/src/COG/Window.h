@@ -32,6 +32,9 @@ namespace COG {
 		inline virtual unsigned width() const noexcept = 0;
 		inline virtual unsigned height() const noexcept = 0;
 
+		inline double aspect_ratio() const noexcept { 
+			return static_cast<double>(width()) / height();
+		}
 	};
 
 }

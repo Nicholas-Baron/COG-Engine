@@ -302,6 +302,7 @@
     <ClInclude Include="src\COG\Events\Event.h" />
     <ClInclude Include="src\COG\Events\KeyEvent.h" />
     <ClInclude Include="src\COG\Events\MouseEvent.h" />
+    <ClInclude Include="src\COG\Game Content\Game_Object_Internal.h" />
     <ClInclude Include="src\COG\Game Content\Game_Object.h" />
     <ClInclude Include="src\COG\Game Content\Model.h" />
     <ClInclude Include="src\COG\Game Content\Rendering\Buffers\IndexBuffer.h" />

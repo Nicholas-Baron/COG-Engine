@@ -111,6 +111,7 @@
     </ClInclude>
     <ClInclude Include="src\COG\Game Content\RenderResourceManager.h" />
     <ClInclude Include="vendor\stb\stb\stb_image.h" />
+    <ClInclude Include="src\COG\Game Content\Game_Object_Internal.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\COG\COG_Engine.cpp">

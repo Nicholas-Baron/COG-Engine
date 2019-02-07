@@ -7,16 +7,13 @@
 #include "Rendering/VertexArray.h"
 
 inline void COG::Model::clean_data() {
-	// indicies.~EZ_Array();
-	// vertex_buffer.~EZ_Array();
-	
-	//indicies.erase(indicies.begin(), indicies.end());
-	//vertex_buffer.erase(vertex_buffer.begin(), vertex_buffer.end());
+	indicies.erase(indicies.begin(), indicies.end());
+	vertex_buffer.erase(vertex_buffer.begin(), vertex_buffer.end());
 }
 
 inline void COG::Model::gen_buffers(bool textured) {
 	
-	vb = std::make_unique<VertexBuffer>(vertex_buffer.data, vertex_buffer.size * sizeof(float));
+	vb = std::make_unique<VertexBuffer>(vertex_buffer.data(), vertex_buffer.size() * sizeof(float));
 
 	VertexBufferLayout* vbl = new VertexBufferLayout;
 	vbl->push<float>(2 + is3D);
@@ -25,7 +22,7 @@ inline void COG::Model::gen_buffers(bool textured) {
 	va = std::make_unique<COG::VertexArray>();
 	va->add_buffer(vb.get(), vbl);
 
-	ib = std::make_unique<IndexBuffer>(indicies.data, indicies.size);
+	ib = std::make_unique<IndexBuffer>(indicies.data(), indicies.size());
 }
 
 COG::Model::Model(const std::string & file, bool is3D) : is3D(is3D) {
@@ -52,8 +49,8 @@ bool COG::Model::load_square(float sideLength, bool textured) {
 
 	if(!textured) {
 
-		vertex_buffer.size = 8;
-		vertex_buffer.data = new float[8]{
+		//vertex_buffer.size = 8;
+		vertex_buffer = {
 		-half_length, -half_length,
 			half_length, -half_length,
 			half_length, half_length,
@@ -61,8 +58,8 @@ bool COG::Model::load_square(float sideLength, bool textured) {
 		};
 	} else {
 		
-		vertex_buffer.size = 16;
-		vertex_buffer.data = new float[16]{
+		//vertex_buffer.size = 16;
+		vertex_buffer = {
 			-half_length, -half_length,
 			0, 1,
 			half_length, -half_length,
@@ -74,8 +71,8 @@ bool COG::Model::load_square(float sideLength, bool textured) {
 		};
 	}
 
-	indicies.size = 8;
-	indicies.data = new unsigned[8]{
+	//indicies.size = 8;
+	indicies = {
 	0, 1, 2,
 		2, 3, 0
 	};
@@ -93,34 +90,28 @@ bool COG::Model::load_model(const std::string & file) {
 	if(loader.LoadFile(file)) {
 		clean_data();
 
-		//vertex_buffer.reserve(loader.LoadedVertices.size() * 3);
-		vertex_buffer = EZ_Array<float>(loader.LoadedVertices.size() * 3);
 		auto magnitude_squared = [](const objl::Vector3& vec) -> float {
 			return (vec.X * vec.X) + (vec.Y * vec.Y) + (vec.Z * vec.Z);
 		};
-
-		unsigned position = 0;
+		
+		vertex_buffer.reserve(loader.LoadedVertices.size() * 3);
+		
 		float farthest_vertex_squared = 0;
 		for(const auto& vert : loader.LoadedVertices) {
 			const auto& data = vert.Position;
-			
-			vertex_buffer[position] = data.X;
-			vertex_buffer[position + 1] = data.Y;
-			vertex_buffer[position + 2] = data.Z;
-			position += 3;
+
+			vertex_buffer.push_back(data.X);
+			vertex_buffer.push_back(data.Y);
+			vertex_buffer.push_back(data.Z);
 
 			farthest_vertex_squared = std::max(magnitude_squared(data), farthest_vertex_squared);
 		}
 
 		normal_factor = 1 / sqrtf(farthest_vertex_squared);
 
-		//indicies.reserve(loader.LoadedIndices.size());
-		indicies = EZ_Array<unsigned>(loader.LoadedIndices.size());
-		position = 0;
+		indicies.reserve(loader.LoadedIndices.size());
 		for(const auto& val : loader.LoadedIndices){
-			//indicies.push_back(std::move(val));
-			indicies[position] = val;
-			position++;
+			indicies.push_back(std::move(val));
 		}
 
 		is3D = true;
@@ -135,6 +126,7 @@ bool COG::Model::load_model(const std::string & file) {
 void COG::Model::draw() const {
 	va->bind();
 	ib->bind();
+	COG_ASSERT_INTERNAL(ib->count() > 2, "What shape has 2 or fewer indicies?");
 	GLCALL(glDrawElements(GL_TRIANGLES, ib->count(), GL_UNSIGNED_INT, NULL));
 }
 

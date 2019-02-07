@@ -9,7 +9,7 @@
 
 namespace COG {
 
-	Shader::Shader(const std::string& filename) {
+	Shader::Shader(const std::string& filename, bool mvp) : use_mvp(mvp) {
 
 		info_internal("OpenGL Version:");
 		GLCALL(info_internal(glGetString(GL_VERSION)));
@@ -21,9 +21,13 @@ namespace COG {
 		shader_id = create(source);
 
 		info_internal("Shader created from " + filename);
+		if(use_mvp) {
+			info_internal("Uses MVP");
+		}
 	}
 
 	int Shader::uniform_loc(const std::string& name) {
+		
 		const auto got = uniform_cache.find(name);
 
 		if(got != uniform_cache.end()) {
@@ -54,10 +58,6 @@ namespace COG {
 		GLCALL(glUniform4f(uniform_loc(name), a, b, c, d));
 	}
 
-	/*void Shader::setUniformMat4f(const std::string & name, const glm::mat4 & matrix) {
-		GLCALL(glUniformMatrix4fv(uniform_loc(name), 1, GL_FALSE, &matrix[0][0]));
-	}
-	  */
 	ShaderProgramSource Shader::parse(const std::string& file_path) {
 		using namespace std;
 		vector<string> shaderText;
@@ -83,9 +83,9 @@ namespace COG {
 
 				if(line.find("version") != string::npos) {
 					if(current == READ_MODE::VERTEX) {
-						cout << "Vertex shader using GLSL Version " << line.substr(9) << endl;
+						info_internal("Vertex shader uses GLSL Version " + line.substr(9));
 					} else if(current == READ_MODE::FRAGMENT) {
-						cout << "Fragment shader using GLSL Version " << line.substr(9) << endl;
+						info_internal("Fragment shader uses GLSL Version " + line.substr(9));
 					}
 				}
 			}

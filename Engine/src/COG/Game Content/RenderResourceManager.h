@@ -12,9 +12,8 @@ namespace COG {
 
 	class RenderResourceManager {
 		public:
-
 		COG_API static void load_model(const std::string& source, const std::string& name);
-		COG_API static void load_shader(const std::string& source, const std::string& name);
+		COG_API static void load_shader(const std::string& source, const std::string& name, bool uses_mvp = false);
 		COG_API static void load_texture(const std::string& source, const std::string& name);
 		
 		COG_API static std::shared_ptr<Model> get_model(const std::string& name);

@@ -10,46 +10,39 @@
 
 namespace COG {
 
-	/*inline glm::vec3 vector_cast(const Vec3d& data){
-		return {data.x_val(), data.y_val(), data.z_val()};
-	}*/
-
 	class Game_Object {
 
 		private:
 		Vec3d pos = Vec3d();
 		Vec3d scale = Vec3d(1);
 
-		//glm::mat4 rotation;
+		float rads = 0;
+		Vec3d axis = {0,0,0};
+
 		std::shared_ptr<Model> model;
 		std::shared_ptr<Shader>	shader;
 
 		public:
-		COG_API Game_Object() noexcept {}
+		COG_API Game_Object() noexcept : scale(1) {}
 		//Use the names
 		COG_API Game_Object(const std::string& model, const std::string& shader);
 
 		COG_API virtual ~Game_Object() {}
 
-		/*inline glm::mat4 translate_mat() const { 
-			return glm::translate(glm::mat4(), vector_cast(pos));
+		COG_API inline Vec3d get_position() const noexcept { return pos; }
+		COG_API inline Vec3d get_scale() const noexcept { return scale; }
+		COG_API inline std::pair<float, Vec3d> get_rotation() const noexcept {
+			return std::make_pair(rads, axis);
 		}
-		inline glm::mat4 scale_mat() const { 
-			return glm::scale(glm::mat4(), vector_cast(scale));
-		}
-		inline glm::mat4 rotation_mat() const noexcept { return rotation; }
-		inline glm::mat4 model_mat() const noexcept { 
-			return translate_mat() * rotation_mat() * scale_mat();
-		}  */
 
 		COG_API inline void set_position(const Vec3d& loc) noexcept { pos = loc; }
 		COG_API inline void set_scale(const Vec3d& axes) noexcept { scale = axes; }
 		COG_API inline void set_rotation(float rads, const Vec3d& axis)	{
-			//rotation = glm::rotate(glm::mat4(), rads, vector_cast(axis));
+			this->rads = rads;
+			this->axis = axis;
 		}
 
 		COG_API inline void move(const Vec3d& amt) noexcept { pos += amt; }
-		//COG_API virtual void shader_settings(const glm::mat4& vpmat) const;
 		COG_API virtual void update(double delta);
 	};
 }
