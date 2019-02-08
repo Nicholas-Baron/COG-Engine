@@ -22,10 +22,8 @@ namespace COG {
 		return static_cast<WindowData*>(glfwGetWindowUserPointer(win));
 	}
 
-	WindowsWindow::WindowsWindow(const WindowDetails& details_in) {
+	WindowsWindow::WindowsWindow(const WindowDetails& details_in) : data(details_in) {
 		
-		data = details_in;
-
 		info_internal("Creating window labeled " + data.title + "...");
 		
 		if(!glfw_ready){
@@ -35,13 +33,19 @@ namespace COG {
 		}
 
 		info_internal("GLFW Version: " + std::string(glfwGetVersionString()));
-				
+		
 		window = glfwCreateWindow(data.width, data.height, data.title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(window);
 		COG_ASSERT_INTERNAL(gladLoadGLLoader((GLADloadproc) glfwGetProcAddress), "Failed to init GLAD!");
 		set_vsync();
 
-		info_internal("Setting callbacks...");
+		info_internal("OpenGL Version: ");
+		info_internal(glGetString(GL_VERSION));
+
+		info_internal("OpenGL Shader Version: ");
+		info_internal(glGetString(GL_SHADING_LANGUAGE_VERSION));
+
+		debug_internal("Setting callbacks...");
 		
 		glfwSetWindowUserPointer(window, &data);
 		

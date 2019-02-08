@@ -11,19 +11,11 @@ namespace COG {
 
 	Shader::Shader(const std::string& filename, bool mvp) : use_mvp(mvp) {
 
-		info_internal("OpenGL Version:");
-		GLCALL(info_internal(glGetString(GL_VERSION)));
-		
-		info_internal("OpenGL Shader Version:");
-		info_internal(glGetString(GL_SHADING_LANGUAGE_VERSION));
-
 		auto source = parse(filename);
 		shader_id = create(source);
 
-		info_internal("Shader created from " + filename);
-		if(use_mvp) {
-			info_internal("Uses MVP");
-		}
+		info_internal("Shader created from " + filename + " that " 
+					  + ((!use_mvp)? "does not use" : "uses") + " MVP");
 	}
 
 	int Shader::uniform_loc(const std::string& name) {

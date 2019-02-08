@@ -232,3 +232,5 @@ Engine/vendor/glm/doc/api/
 Engine/vendor/glm/doc/manual\.pdf
 
 Engine/vendor/glm/doc/manual/
+
+*.enc

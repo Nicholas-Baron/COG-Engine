@@ -49,7 +49,6 @@ bool COG::Model::load_square(float sideLength, bool textured) {
 
 	if(!textured) {
 
-		//vertex_buffer.size = 8;
 		vertex_buffer = {
 		-half_length, -half_length,
 			half_length, -half_length,
@@ -58,7 +57,6 @@ bool COG::Model::load_square(float sideLength, bool textured) {
 		};
 	} else {
 		
-		//vertex_buffer.size = 16;
 		vertex_buffer = {
 			-half_length, -half_length,
 			0, 1,
@@ -71,7 +69,6 @@ bool COG::Model::load_square(float sideLength, bool textured) {
 		};
 	}
 
-	//indicies.size = 8;
 	indicies = {
 	0, 1, 2,
 		2, 3, 0
@@ -90,13 +87,13 @@ bool COG::Model::load_model(const std::string & file) {
 	if(loader.LoadFile(file)) {
 		clean_data();
 
-		auto magnitude_squared = [](const objl::Vector3& vec) -> float {
+		auto magnitude_squared = [](const objl::Vector3& vec) -> double {
 			return (vec.X * vec.X) + (vec.Y * vec.Y) + (vec.Z * vec.Z);
 		};
 		
 		vertex_buffer.reserve(loader.LoadedVertices.size() * 3);
 		
-		float farthest_vertex_squared = 0;
+		double farthest_vertex_squared = 0;
 		for(const auto& vert : loader.LoadedVertices) {
 			const auto& data = vert.Position;
 
@@ -107,7 +104,7 @@ bool COG::Model::load_model(const std::string & file) {
 			farthest_vertex_squared = std::max(magnitude_squared(data), farthest_vertex_squared);
 		}
 
-		normal_factor = 1 / sqrtf(farthest_vertex_squared);
+		normal_factor = 1 / sqrt(farthest_vertex_squared);
 
 		indicies.reserve(loader.LoadedIndices.size());
 		for(const auto& val : loader.LoadedIndices){

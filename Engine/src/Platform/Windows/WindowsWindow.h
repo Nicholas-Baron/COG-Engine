@@ -14,11 +14,9 @@ namespace COG {
 
 		Window::callback event_callback;
 
-		inline void operator=(const WindowDetails& rhs) {
-			title = rhs.title;
-			width = rhs.width;
-			height = rhs.height;
-		}
+		WindowData(const WindowDetails& rhs) 
+			: title(rhs.title), width(rhs.width), height(rhs.height) {}
+
 	};
 	
 	class WindowsWindow : public Window {

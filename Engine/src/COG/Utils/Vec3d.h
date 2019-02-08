@@ -6,6 +6,7 @@
 #include "COG/Log.h"
 
 #include "Vec2d.h"
+#include <cmath>
 
 class COG_API Vec3d {
 	private: 
@@ -41,7 +42,7 @@ class COG_API Vec3d {
 	}
 	
 	constexpr inline double sqr_magnitude() const noexcept {
-		return x*x + y*y + z*z;
+		return (x*x) + (y*y) + (z*z);
 	}
 
 	constexpr inline double dot(const Vec3d& rhs) const noexcept {
@@ -56,9 +57,13 @@ class COG_API Vec3d {
 		return (rhs - *this).sqr_magnitude();
 	}
 
+	constexpr inline Vec3d normalized() const {
+		return *this / sqrt(sqr_magnitude());
+	}
+
 	//Operator overloads (const at top)
 
-	inline double operator[](unsigned short index){
+	inline double operator[](unsigned short index) const {
 		 COG::COG_ASSERT_INTERNAL(index < 3, "A Vec3d was incorrectly accessed!");
 		 switch(index) {
 			 case 0: return x;

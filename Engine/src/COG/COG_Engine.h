@@ -70,8 +70,8 @@ namespace COG{
 			return duration_cast<milliD>(time_now() - start).count();
 		}
 
-		COG_API inline void set_projection_ortho(double left, double right, double top, double bottom){
-			proj_data = {left, right, top, bottom};
+		COG_API inline void set_projection_ortho(double left, double right, double bottom, double top){
+			proj_data = {left, right, bottom, top};
 			proj_mode = ProjectionMode::ORTHO;
 		}
 
@@ -82,12 +82,12 @@ namespace COG{
 		}
 
 		COG_API inline void set_ortho_from_top_left(double height) {
-			set_projection_ortho(0, height * window->aspect_ratio(), 0, -height);
+			set_projection_ortho(0, height * window->aspect_ratio(), -height, 0);
 			camera_pos = Vec3d(height / 2, height / 2, 0);
 		}
 
 		COG_API inline void set_ortho_from_bottom_left(double height) {
-			set_projection_ortho(0, height * window->aspect_ratio(), height, 0);
+			set_projection_ortho(0, height * window->aspect_ratio(), 0, height);
 			camera_pos = Vec3d(height / 2, -height / 2, 0);
 		}
 

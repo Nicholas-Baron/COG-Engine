@@ -6,9 +6,11 @@
 #include "Game_Object.h"
 
 #include "glm/glm.hpp"
+#include "glm/gtc/quaternion.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 namespace COG {
 	
@@ -21,36 +23,35 @@ namespace COG {
 	}
 	
 	inline glm::mat4 scale_mat(const Game_Object* go) {
-		auto vec = go->get_scale();
-		debug_internal(std::to_string(vec));
 		return glm::scale(vector_cast(go->get_scale()));
 	}
 	
 	inline glm::mat4 rotation_mat(const Game_Object* go) noexcept {
 		auto data = go->get_rotation();
+		glm::quat rot(vector_cast(data.second));
+		//return glm::toMat4(rot);
 		return glm::rotate(data.first, vector_cast(data.second));
 	}
 	
-	inline glm::mat4 model_mat(const Game_Object* go) noexcept {
+	glm::mat4 model_mat(const Game_Object* go) noexcept {
 
 		auto rot = rotation_mat(go);
 		auto trans = translate_mat(go);
 		auto scale = scale_mat(go);
 		auto combine = trans * rot * scale;
-		/*for(int i = 0; i < combine.length(); i++) {
-			for(int j = 0; j < combine[i].length(); j++) {
-				debug_internal(combine[i][j]);
-			}
-		}*/ 
-		if(combine == (glm::mat4() - glm::mat4())){
+
+		static const auto zero_mat = glm::mat4() - glm::mat4();
+
+		if(combine == zero_mat){
 			if(combine == rot) {
 				error_internal("Rotation is 0!");
 			} else if(combine == scale) {
-				error_internal("Scale is 0! " + std::to_string(scale[0][0]));
+				error_internal("Scale is 0!");
 			} else if(combine == trans){
 				error_internal("Trans is 0!");
 			}	 
 		}
+
 		return combine;
 	}  
 }

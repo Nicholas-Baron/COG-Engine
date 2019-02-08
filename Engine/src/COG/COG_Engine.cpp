@@ -38,12 +38,12 @@ namespace COG {
 		
 		window = create_window(details);
 
-		info_internal("Setting main event callback...")	;
+		debug_internal("Setting main event callback...")	;
 		window->set_callback(std::bind(&COG_Engine::on_event, this, std::placeholders::_1));
 
 		set_clear_color(0, .5, 1);
 		
-		info_internal("Starting engine...");
+		debug_internal("Starting engine...");
 
 		start = time_now();
 	}
