@@ -57,6 +57,10 @@ class COG_API Vec3d {
 		return (rhs - *this).sqr_magnitude();
 	}
 
+	inline bool valid() const noexcept{
+		return !isnan(x) && !isnan(y) && !isnan(z);
+	}
+
 	constexpr inline Vec3d normalized() const {
 		return *this / sqrt(sqr_magnitude());
 	}

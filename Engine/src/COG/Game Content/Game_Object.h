@@ -29,7 +29,10 @@ namespace COG {
 		//Use the names
 		COG_API Game_Object(const std::string& model, const std::string& shader);
 
-		COG_API virtual ~Game_Object() {}
+		COG_API virtual ~Game_Object() {
+			model.~shared_ptr();
+			shader.~shared_ptr();
+		}
 
 		COG_API inline Vec3d get_position() const noexcept { return pos; }
 		COG_API inline Vec3d get_scale() const noexcept { return scale; }

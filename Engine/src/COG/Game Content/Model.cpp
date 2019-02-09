@@ -13,16 +13,18 @@ inline void COG::Model::clean_data() {
 
 inline void COG::Model::gen_buffers(bool textured) {
 	
-	vb = std::make_unique<VertexBuffer>(vertex_buffer.data(), vertex_buffer.size() * sizeof(float));
+	using std::make_unique;
+
+	vb = make_unique<VertexBuffer>(vertex_buffer.data(), vertex_buffer.size() * sizeof(float));
 
 	VertexBufferLayout* vbl = new VertexBufferLayout;
 	vbl->push<float>(2 + is3D);
 	if(textured) { vbl->push<float>(2); }
 
-	va = std::make_unique<COG::VertexArray>();
+	va = make_unique<COG::VertexArray>();
 	va->add_buffer(vb.get(), vbl);
 
-	ib = std::make_unique<IndexBuffer>(indicies.data(), indicies.size());
+	ib = make_unique<IndexBuffer>(indicies.data(), indicies.size());
 }
 
 COG::Model::Model(const std::string & file, bool is3D) : is3D(is3D) {

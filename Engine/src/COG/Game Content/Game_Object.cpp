@@ -59,10 +59,9 @@ namespace COG {
 void COG::Game_Object::update(double delta) {
 
 	constexpr double speed = 3.5;
+	Vec3d will_move = move_vector.normalized() * speed * delta;
 
-	if(move_vector.sqr_magnitude() >= speed) {
-		Vec3d will_move = move_vector.normalized() * speed * delta;
-
+	if(move_vector.sqr_magnitude() >= speed && will_move.valid()) {
 		move_vector -= will_move;
 		pos += will_move;
 	} else {

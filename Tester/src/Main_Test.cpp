@@ -21,6 +21,7 @@ class TestLayer : public COG::Layer {
 
 		COG::RenderResourceManager::unload_model("teapot");
 		COG::RenderResourceManager::unload_shader("basic");
+		COG::RenderResourceManager::unload_model("square");
 	}
 
 	virtual void on_attach() override {
@@ -36,12 +37,11 @@ class TestLayer : public COG::Layer {
 		}
 		
 		//The defaults for any object are as follows
-		//position({0});
-		//rotation(0, {0,0,1});
-		//scale({1});
+		//position({0})
+		//rotation(0, {0,0,1})
+		//scale({1})
 		
-		object = Game_Object("square", "basic");
-
+		object = Game_Object("teapot", "basic");
 		shade = RenderResourceManager::get_shader("basic");
 	}
 
