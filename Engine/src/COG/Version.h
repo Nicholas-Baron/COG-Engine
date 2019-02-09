@@ -5,12 +5,12 @@
 namespace COG {
 
 	constexpr unsigned short major_version = 0;
-	constexpr unsigned short minor_version = 1;
-	constexpr unsigned short revision = 1;
+	constexpr unsigned short minor_version = 2;
+	constexpr unsigned short revision = 0;
 
-	constexpr unsigned release_code = 190126;
+	constexpr unsigned release_code = 190209;
 
-	const std::string release_name = "Ogre";
+	static const std::string release_name = "Ogre";
 
 	COG_API inline std::string version_print(){
 		std::stringstream stream;
